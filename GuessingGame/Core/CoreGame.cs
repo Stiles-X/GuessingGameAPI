@@ -68,7 +68,7 @@ namespace GuessingGame.Core
             if (AllowedGuesses.HasValue)
             {
                 if (_UsedGuesses >= AllowedGuesses)
-                    throw new ArgumentException("You are out of guesses");
+                    throw new OutOfTriesException("You are out of guesses");
             }
             else
                 throw new PropertyNotSetException("AllowedGuesses", "You haven't set AllowedGuesses yet");

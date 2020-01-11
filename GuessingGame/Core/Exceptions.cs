@@ -4,7 +4,7 @@ using System.Text;
 #nullable enable
 namespace GuessingGame.Core.Exceptions
 {
-    public class PropertyNotSetException : Exception
+    public class PropertyNotSetException : InvalidOperationException
     {
         public PropertyNotSetException() { }
         public PropertyNotSetException(string? paramName)
@@ -14,5 +14,10 @@ namespace GuessingGame.Core.Exceptions
         public virtual string? ParamName { get; }
         public static string? GetMsg(string? message, string? paramName)
             => message + ", Param: " + paramName;
+    }
+    public class OutOfTriesException : InvalidOperationException
+    {
+        public OutOfTriesException() { }
+        public OutOfTriesException(string? message) : base(message) { }
     }
 }

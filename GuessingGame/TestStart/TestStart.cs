@@ -11,7 +11,7 @@ namespace GuessingGame
         public static void TestMain()
         {
             API api = new API(GameMode.unlocked);
-            
+
             api.SetMax(10);
             api.SetMin(1);
             api.SetCorrect(5);
@@ -21,7 +21,7 @@ namespace GuessingGame
             {
                 do { correct = GuessTest(api.GetRandom(), api); }
                 while (!correct);
-            } catch (ArgumentException) { Console.WriteLine("Out of guesses"); }
+            } catch (OutOfTriesException) { Console.WriteLine("Out of guesses"); }
 
             Console.Read();
         }
