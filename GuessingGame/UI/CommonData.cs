@@ -6,7 +6,7 @@ namespace GuessingGame.UI
 {
     class CommonData
     {
-        public static readonly string help = "Usage: (h)elp, (v)ersion, (s)ingle, (m)ulti\n(a)bout, (l)icense, -h, --help, -a, --about\n -v, --version, -l, --license";
+        public static readonly string help = "Usage: (h)elp, (v)ersion, (s)ingle, (m)ulti\n(a)bout, (l)icense, (q)uit, (e)xit, -h, --help, -a, --about\n -v, --version, -l, --license";
         public static readonly string version = "0.0.0";
         public static readonly string license = "All rights reserved. (C) 2020.";
         public static readonly string about = "Developed by Github/Stiles-X\nA library for guessing games\nExtensible, and codable\nSampleUIAttached";
