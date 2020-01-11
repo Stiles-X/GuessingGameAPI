@@ -8,9 +8,17 @@ namespace GuessingGame.UI
     {
         public static readonly string help = "Usage: help, version, (s)ingle, (m)ulti\n       -h, --help, -v, --version";
         public static readonly string version = "0.0.0";
+        public static readonly string license = "All rights reserved. (C) 2020.";
+        public static readonly string about = "Developed by Github/Stiles-X\nA library for guessing games\nExtensible, and codable\nSampleUIAttached";
         public static readonly string not_found = $"Command not found. {help}";
         public static readonly string s = "Entering single-player game";
         public static readonly string m = "Entering multi-player game";
+        public static readonly string AsciiLogoV = GetAsciiLogo("v" + CommonData.version);
+        public static void ClearAsciiLogoV()
+        {
+            Console.Clear();
+            Console.WriteLine(AsciiLogoV);
+        }
         public static string GetAsciiLogo(string text = "")
         {
             return
@@ -35,14 +43,16 @@ namespace GuessingGame.UI
         }
         public static int intput(string question)
         {
-            int intAnswer;
-            string strAnswer;
-            do
+            string strAnswer = input(question);
+            if (strAnswer == "cls" | strAnswer == "clear") { ClearAsciiLogoV(); }
+            bool CanParse = (int.TryParse(strAnswer, out int intAnswer));
+            if (!CanParse)
             {
-                strAnswer = input(question);
+                return intput(question);
+            } else
+            {
+                return intAnswer;
             }
-            while (!(int.TryParse(strAnswer, out intAnswer)));
-            return intAnswer;
         }
     }
 }

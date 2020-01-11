@@ -87,7 +87,7 @@ namespace GuessingGame.UI
         static void MainMenuDisplay(MainMenuCommand mainMenuCommand = MainMenuCommand.help)
         {
             Console.Clear();
-            Console.WriteLine(CommonData.GetAsciiLogo("v" + CommonData.version));
+            Console.WriteLine(CommonData.AsciiLogoV);
             Console.WriteLine("__________________________________________");
             string content = mainMenuCommand switch
             {

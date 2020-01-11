@@ -27,6 +27,7 @@ namespace GuessingGame.UI
 
         public static void FlexPlayer(GameMode gameMode)
         {
+            CommonData.ClearAsciiLogoV();
             API api = new API();
             api.SetMin(CommonData.intput("Enter Min Number: "));
             api.SetMax(CommonData.intput("Enter Max Number: "));
