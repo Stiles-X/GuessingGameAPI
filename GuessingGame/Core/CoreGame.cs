@@ -65,9 +65,9 @@ namespace GuessingGame.Core
                 throw new PropertyNotSetException("Correct", "Correct has not been set");
             if ((guess > _Max) | (guess < _Min))
                 throw new ArgumentOutOfRangeException("guess", "Your guess was outside of max and min range");
-            if (AllowedGuesses.HasValue)
+            if (_AllowedGuesses.HasValue)
             {
-                if (_UsedGuesses >= AllowedGuesses)
+                if (_UsedGuesses >= _AllowedGuesses)
                     throw new OutOfTriesException("You are out of guesses");
             }
             else
@@ -83,7 +83,17 @@ namespace GuessingGame.Core
 
         // TO BE USED WITH GUESSES
         // Allowed Guesses
-        public int? AllowedGuesses { get; set; }
+        private int? _AllowedGuesses { get; set; }
+        public int? AllowedGuesses
+        {
+            get { return _AllowedGuesses; }
+            set
+            {
+                if (value < 0)
+                    throw new ArgumentOutOfRangeException("AllowedGuesses", "Number of Allowed guesses can not be less than 0");
+                _AllowedGuesses = value;
+            }
+        }
         // Used Guesses
         private int _UsedGuesses { get; set; }
         public int UsedGuesses
@@ -93,7 +103,7 @@ namespace GuessingGame.Core
             {
                 if (value < 0)
                     throw new ArgumentOutOfRangeException("UsedGuesses", "Number of used guesses can not be less than 0");
-                if (value > AllowedGuesses)
+                if (value > _AllowedGuesses)
                     throw new ArgumentOutOfRangeException("UsedGuesses", "Number of used guesses can not be more than allowed guesses");
                 _UsedGuesses = value;
             }
@@ -108,10 +118,7 @@ namespace GuessingGame.Core
                     throw new PropertyNotSetException("Max", "Max value has not been set");
                 if (!(_Min.HasValue))
                     throw new PropertyNotSetException("Min", "Min value has not been set");
-                System.Random random = new System.Random();
-                int Max = _Max ?? default;
-                int Min = _Min ?? default;
-                return random.Next(Min, Max + 1); // Our guessing game max is inclusive, rand's max is exclusive so we must plus 1
+                return new System.Random().Next((int)_Min, (int)_Max + 1); // Our guessing game max is inclusive, rand's max is exclusive so we must plus 1
             }
         }
     }
