@@ -10,15 +10,17 @@ namespace GuessingGame.UI
         version,
         help,
         not_found,
-        quit
+        quit,
+        s,
+        m
     }
     class UI
     {
         // Main
         public static void Main(string[] args)
         {
-            Args.HandleArgs(args);
-            MainMenu();
+            if(Args.HandleArgs(args) == null)
+                MainMenu();
         }
 
         //Main Menu
