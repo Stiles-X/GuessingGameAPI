@@ -15,7 +15,7 @@ namespace GuessingGame.Core
             {
                 if (_Min.HasValue) // Check if Min have been set, if so
                     if (value < _Min) // Check if the number we are trying to set as max
-                        throw new ArgumentOutOfRangeException(); // is less than min
+                        throw new ArgumentOutOfRangeException("Min", "Min cannot be more than Max"); // is less than min
                 _Max = value; // Then set _Max as the value
             }
         }
@@ -29,7 +29,7 @@ namespace GuessingGame.Core
             {
                 if (_Max.HasValue) // Check if Max have been set, if so
                     if (value > _Max) // Check if the number we are trying to set as min
-                        throw new ArgumentOutOfRangeException(); // is less than max
+                        throw new ArgumentOutOfRangeException("Max", "Max cannot be more than Min"); // is less than max
                 _Min = value; // Then set _Min as the value
             }
         }
@@ -44,24 +44,41 @@ namespace GuessingGame.Core
                 if (_Max.HasValue & _Min.HasValue) // Check if min or max have been set, if so
                 {
                     if ((value > _Max) | (value < _Min)) // Check if value is {read the code}
-                        throw new ArgumentOutOfRangeException(); // value out of range
+                        throw new ArgumentOutOfRangeException("value", "Correct can not be outside of max and min range"); // value out of range
                     _Correct = value; // Then set
                 }
                 else
-                    throw new ArgumentNullException("Max and Min value has not been set");
+                    throw new ArgumentNullException("Max, Min", "Max or Min value has not been set");
             }
         }
+
         // Guess (the method acting)
         public bool Guess(int guess)
         {
             if (!_Correct.HasValue)
-                throw new ArgumentNullException("Correct has not been set");
+                throw new ArgumentNullException("guess", "Correct has not been set");
             if ((guess > _Max) | (guess < _Min))
-                throw new ArgumentOutOfRangeException();
+                throw new ArgumentOutOfRangeException("guess", "Your guess was outside of max and min range");
             if (guess == _Correct)
                 return true;
             else
                 return false;
+        }
+        // Allowed Guesses (to be use with guess)
+        public int? AllowedGuesses { get; set; }
+        // Used Guesses (to be use with allowed guesses)
+        private int _UsedGuesses { get; set; }
+        public int UsedGuesses
+        {
+            get { return _UsedGuesses; }
+            set
+            {
+                if (value < 0)
+                    throw new ArgumentOutOfRangeException("UsedGuesses", "Number of used guesses can not be less than 0");
+                if (value > AllowedGuesses)
+                    throw new ArgumentOutOfRangeException("UsedGuesses", "Number of used guesses can not be more than allowed guesses");
+                _UsedGuesses = value;
+            }
         }
     }
 }
