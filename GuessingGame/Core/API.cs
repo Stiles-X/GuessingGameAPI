@@ -4,12 +4,20 @@ using System.Text;
 
 namespace GuessingGame.Core
 {
+    public enum GameMode
+    {
+        sp, // Single-Player
+        mp  // Multi-Player
+    }
     class API
     {
-        public API()
+        public API(GameMode mode)
         {
             _CoreGame = new CoreGame();
+            _GameMode = mode;
         }
+        // GameMode
+        public GameMode _GameMode { get; set; }
 
         // Game (storing a game instance)
         private CoreGame _CoreGame { get; set; }
@@ -37,6 +45,17 @@ namespace GuessingGame.Core
             SetCorrect(_CoreGame.Random);
         }
 
+        // Guess
+        public bool Guess(int guess) { return _CoreGame.Guess(guess); }
 
+        // TO BE USED WITH GUESS
+        // Allowed Guesses - GET / SET
+        public void SetAllowedGuesses(int amount) { _CoreGame.AllowedGuesses = amount; }
+        public int? GetAllowedGuesses() { return _CoreGame.AllowedGuesses; }
+        // Used Guesses - GET
+        public int GetUsedGuesses() { return _CoreGame.UsedGuesses; }
+
+        // Random - GET
+        public int GetRandom() { return _CoreGame.Random; }
     }
 }
