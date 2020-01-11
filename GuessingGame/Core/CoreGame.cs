@@ -4,7 +4,7 @@ using System.Text;
 
 namespace GuessingGame.Core
 {
-    class Game
+    class CoreGame
     {
         // Max
         private int? _Max { get; set; }
@@ -15,7 +15,10 @@ namespace GuessingGame.Core
             {
                 if (_Min.HasValue) // Check if Min have been set, if so
                     if (value < _Min) // Check if the number we are trying to set as max
-                        throw new ArgumentOutOfRangeException("Min", "Min cannot be more than Max"); // is less than min
+                        throw new ArgumentOutOfRangeException("Max", "Max cannot be less than Min"); // is less than min
+                if (_Correct.HasValue) // Check if Correct has been set, if so
+                    if (value < _Correct)
+                        throw new ArgumentOutOfRangeException("Max", "Max cannot be less than Correct"); // is less than correct
                 _Max = value; // Then set _Max as the value
             }
         }
@@ -29,7 +32,10 @@ namespace GuessingGame.Core
             {
                 if (_Max.HasValue) // Check if Max have been set, if so
                     if (value > _Max) // Check if the number we are trying to set as min
-                        throw new ArgumentOutOfRangeException("Max", "Max cannot be more than Min"); // is less than max
+                        throw new ArgumentOutOfRangeException("Min", "Min cannot be more than Max"); // is less than max
+                if (_Correct.HasValue) // Check if Correct has been set, if so
+                    if (value > _Correct)
+                        throw new ArgumentOutOfRangeException("Min", "Min cannot be more than Correct"); // is more than correct
                 _Min = value; // Then set _Min as the value
             }
         }
@@ -91,14 +97,17 @@ namespace GuessingGame.Core
         }
 
         // Random (generate a valid int guess from max min range)
-        public int Random()
+        public int Random
         {
-            if (!(_Max.HasValue | _Min.HasValue)) // Check if min or max have been set, if so
-                throw new ArgumentNullException("Max, Min", "Max or Min value has not been set");
-            System.Random random = new System.Random();
-            int Max = _Max ?? default;
-            int Min = _Min ?? default;
-            return random.Next(Min, Max + 1); // Our guessing game max is inclusive, rand's max is exclusive so we must plus 1
+            get
+            {
+                if (!(_Max.HasValue | _Min.HasValue)) // Check if min or max have been set, if so
+                    throw new ArgumentNullException("Max, Min", "Max or Min value has not been set");
+                System.Random random = new System.Random();
+                int Max = _Max ?? default;
+                int Min = _Min ?? default;
+                return random.Next(Min, Max + 1); // Our guessing game max is inclusive, rand's max is exclusive so we must plus 1
+            }
         }
     }
 }
