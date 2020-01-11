@@ -15,8 +15,8 @@ namespace GuessingGame.UI
                 string not_found = CommonData.not_found;
                 string message = arg switch  // Handling command line arguments
                 {
-                    "s" => "Entering single-player game",
-                    "m" => "Entering multi-player game",
+                    "s" => CommonData.s,
+                    "m" => CommonData.m,
                     "help" => help,
                     "--help" => help,
                     "-h" => help,

@@ -108,6 +108,15 @@ namespace GuessingGame.Core
                 _UsedGuesses = value;
             }
         }
+        public int LeftGuesses
+        {
+            get 
+            {
+                if (!(_AllowedGuesses.HasValue))
+                    throw new PropertyNotSetException("AllowedGuesses", "You haven't set AllowedGuesses yet");
+                return (int)_AllowedGuesses - _UsedGuesses; 
+            }
+        }
 
         // Random (generate a valid int guess from max min range)
         public int Random

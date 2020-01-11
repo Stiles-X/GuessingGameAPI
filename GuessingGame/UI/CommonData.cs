@@ -6,10 +6,11 @@ namespace GuessingGame.UI
 {
     class CommonData
     {
-        public static readonly string help = "Usage: help, version";
+        public static readonly string help = "Usage: help, version, (s)ingle, (m)ulti\n       -h, --help, -v, --version";
         public static readonly string version = "0.0.0";
         public static readonly string not_found = $"Command not found. {help}";
-        public static string ascii_logo { get { return GetAsciiLogo(); } }
+        public static readonly string s = "Entering single-player game";
+        public static readonly string m = "Entering multi-player game";
         public static string GetAsciiLogo(string text = "")
         {
             return
@@ -26,6 +27,22 @@ namespace GuessingGame.UI
  | | |_ |/ _` | '_ ` _ \ / _ \             
  | |__| | (_| | | | | | |  __/             
   \_____|\__,_|_| |_| |_|\___|" + $"{text}    \n";
+        }
+        public static string input(string question)
+        {
+            Console.Write(question);
+            return Console.ReadLine();
+        }
+        public static int intput(string question)
+        {
+            int intAnswer;
+            string strAnswer;
+            do
+            {
+                strAnswer = input(question);
+            }
+            while (!(int.TryParse(strAnswer, out intAnswer)));
+            return intAnswer;
         }
     }
 }

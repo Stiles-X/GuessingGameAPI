@@ -69,6 +69,8 @@ namespace GuessingGame.Core
         public int? GetAllowedGuesses() { return _CoreGame.AllowedGuesses; }
         // Used Guesses - GET
         public int GetUsedGuesses() { return _CoreGame.UsedGuesses; }
+        // Left Guesses - GET
+        public int GetLeftGuesses() { return _CoreGame.LeftGuesses; }
 
         // Random - GET
         public int GetRandom() { return _CoreGame.Random; }
