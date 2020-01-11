@@ -51,5 +51,18 @@ namespace GuessingGame.Core
                     throw new ArgumentNullException("Max and Min value has not been set");
             }
         }
+        // Guess (the method acting)
+        public bool Guess(int guess)
+        {
+            if (!_Correct.HasValue)
+            {
+                throw new ArgumentNullException("Max and Min value has not been set");
+            }
+
+            if (guess == _Correct)
+                return true;
+            else
+                return false;
+        }
     }
 }
