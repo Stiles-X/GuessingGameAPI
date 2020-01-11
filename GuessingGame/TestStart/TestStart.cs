@@ -10,7 +10,7 @@ namespace GuessingGame
     {
         public static void TestMain()
         {
-            API api = new API(GameMode.unlocked);
+            API api = new API(GameMode.locked);
 
             api.SetMax(10);
             api.SetMin(1);

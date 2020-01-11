@@ -1,10 +1,10 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Text;
-using GuessingGame.Core.Exceptions;
 
 namespace GuessingGame.Core
 {
+    using Exceptions;
     class CoreGame
     {
         // Max

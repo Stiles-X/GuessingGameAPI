@@ -4,6 +4,7 @@ using System.Text;
 
 namespace GuessingGame.Core
 {
+    using Exceptions;
     public enum GameMode
     {
         unlocked, // Single-Player
@@ -28,7 +29,7 @@ namespace GuessingGame.Core
         public void SetMax(int Max)
         {
             if (_IsMaxSet & (_GameMode == GameMode.locked))
-                throw new ArgumentException("You have already set the max value");
+                throw new ForbiddenException("Max", "You have already set the max value, and the game mode is locked.");
             _IsMaxSet = true;
             _CoreGame.Max = Max;
         }
@@ -39,7 +40,7 @@ namespace GuessingGame.Core
         public void SetMin(int Min) 
         {
             if (_IsMinSet & (_GameMode == GameMode.locked))
-                throw new ArgumentException("You have already set the min value");
+                throw new ForbiddenException("Min", "You have already set the min value, and the game mode is locked.");
             _IsMinSet = true;
             _CoreGame.Min = Min; 
         }
@@ -50,7 +51,7 @@ namespace GuessingGame.Core
         public void SetCorrect(int Correct)
         {
             if (_IsCorrectSet & (_GameMode == GameMode.locked))  // Checking so that you can only set Correct one time
-                throw new ArgumentException("You have already set the correct answer");
+                throw new ForbiddenException("Correct", "You have already set the correct answer, and the game mode is locked.");
             _IsCorrectSet = true;
             _CoreGame.Correct = Correct;
         }
