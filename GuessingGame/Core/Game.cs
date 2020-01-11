@@ -91,9 +91,14 @@ namespace GuessingGame.Core
         }
 
         // Random (generate a valid int guess from max min range)
-        public static void Random()
+        public int Random()
         {
-
+            if (!(_Max.HasValue | _Min.HasValue)) // Check if min or max have been set, if so
+                throw new ArgumentNullException("Max, Min", "Max or Min value has not been set");
+            System.Random random = new System.Random();
+            int Max = _Max ?? default;
+            int Min = _Min ?? default;
+            return random.Next(Min, Max + 1); // Our guessing game max is inclusive, rand's max is exclusive so we must plus 1
         }
     }
 }

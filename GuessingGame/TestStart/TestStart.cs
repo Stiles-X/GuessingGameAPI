@@ -16,9 +16,9 @@ namespace GuessingGame
                 Correct = 5,
                 AllowedGuesses = 5
             };
-            GuessTest(3, game);
-            GuessTest(7, game);
-            GuessTest(5, game);
+            GuessTest(game.Random(), game);
+            GuessTest(game.Random(), game);
+            GuessTest(game.Random(), game);
             Console.Read();
         }
         public static void GuessTest(int guess, Game game)
