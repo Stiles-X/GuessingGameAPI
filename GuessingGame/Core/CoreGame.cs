@@ -4,6 +4,7 @@ using System.Text;
 
 namespace GuessingGame.Core
 {
+    using Exceptions;
     class CoreGame
     {
         // Max
@@ -47,8 +48,10 @@ namespace GuessingGame.Core
             get { return _Correct; }
             set
             {
-                if (!(_Max.HasValue | _Min.HasValue)) // Check if min or max have been set, if so
-                    throw new ArgumentNullException("Max, Min", "Max or Min value has not been set");
+                if (!(_Max.HasValue)) // Check if min or max have been set, if so
+                    throw new PropertyNotSetException("Max", "Max value has not been set");
+                if (!(_Min.HasValue))
+                    throw new PropertyNotSetException("Min", "Min value has not been set");
                 if ((value > _Max) | (value < _Min)) // Check if value is {read the code}
                     throw new ArgumentOutOfRangeException("value", "Correct can not be outside of max and min range"); // value out of range
                 _Correct = value; // Then set
@@ -59,16 +62,16 @@ namespace GuessingGame.Core
         public bool Guess(int guess)
         {
             if (!_Correct.HasValue)
-                throw new ArgumentNullException("Correct", "Correct has not been set");
+                throw new PropertyNotSetException("Correct", "Correct has not been set");
             if ((guess > _Max) | (guess < _Min))
                 throw new ArgumentOutOfRangeException("guess", "Your guess was outside of max and min range");
-            if (AllowedGuesses.HasValue)
+            if (_AllowedGuesses.HasValue)
             {
-                if (_UsedGuesses >= AllowedGuesses)
-                    throw new ArgumentException("You are out of guesses");
+                if (_UsedGuesses >= _AllowedGuesses)
+                    throw new OutOfTriesException("You are out of guesses");
             }
             else
-                throw new ArgumentNullException("AllowedGuesses", "You haven't set AllowedGuesses yet");
+                throw new PropertyNotSetException("AllowedGuesses", "You haven't set AllowedGuesses yet");
             bool result;
             if (guess == _Correct)
                 result = true;
@@ -80,7 +83,17 @@ namespace GuessingGame.Core
 
         // TO BE USED WITH GUESSES
         // Allowed Guesses
-        public int? AllowedGuesses { get; set; }
+        private int? _AllowedGuesses { get; set; }
+        public int? AllowedGuesses
+        {
+            get { return _AllowedGuesses; }
+            set
+            {
+                if (value < 0)
+                    throw new ArgumentOutOfRangeException("AllowedGuesses", "Number of Allowed guesses can not be less than 0");
+                _AllowedGuesses = value;
+            }
+        }
         // Used Guesses
         private int _UsedGuesses { get; set; }
         public int UsedGuesses
@@ -90,7 +103,7 @@ namespace GuessingGame.Core
             {
                 if (value < 0)
                     throw new ArgumentOutOfRangeException("UsedGuesses", "Number of used guesses can not be less than 0");
-                if (value > AllowedGuesses)
+                if (value > _AllowedGuesses)
                     throw new ArgumentOutOfRangeException("UsedGuesses", "Number of used guesses can not be more than allowed guesses");
                 _UsedGuesses = value;
             }
@@ -101,12 +114,11 @@ namespace GuessingGame.Core
         {
             get
             {
-                if (!(_Max.HasValue | _Min.HasValue)) // Check if min or max have been set, if so
-                    throw new ArgumentNullException("Max, Min", "Max or Min value has not been set");
-                System.Random random = new System.Random();
-                int Max = _Max ?? default;
-                int Min = _Min ?? default;
-                return random.Next(Min, Max + 1); // Our guessing game max is inclusive, rand's max is exclusive so we must plus 1
+                if (!(_Max.HasValue)) // Check if min or max have been set, if so
+                    throw new PropertyNotSetException("Max", "Max value has not been set");
+                if (!(_Min.HasValue))
+                    throw new PropertyNotSetException("Min", "Min value has not been set");
+                return new System.Random().Next((int)_Min, (int)_Max + 1); // Our guessing game max is inclusive, rand's max is exclusive so we must plus 1
             }
         }
     }
