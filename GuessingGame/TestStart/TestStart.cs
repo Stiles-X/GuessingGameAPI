@@ -10,7 +10,8 @@ namespace GuessingGame
     {
         public static void TestMain(string[] args)
         {
-            GuessingGame.UI.UI.UIMain(args);
+            GuessingGame.UI.UI.Main(args);
+            Program.FakeMain(args);
         }
     }
 }
