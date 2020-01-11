@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Text;
 using GuessingGame.Core;
+using GuessingGame.Core.Exceptions;
 
 namespace GuessingGame
 {
@@ -9,12 +10,11 @@ namespace GuessingGame
     {
         public static void TestMain()
         {
-            API api = new API(GameMode.locked);
+            API api = new API(GameMode.unlocked);
             
             api.SetMax(10);
-            api.SetMax(6);
             api.SetMin(1);
-            api.SetCorrectRandom();
+            api.SetCorrect(5);
             api.SetAllowedGuesses(5);
             bool correct;
             try
