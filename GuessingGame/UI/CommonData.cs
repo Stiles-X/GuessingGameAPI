@@ -6,9 +6,9 @@ namespace GuessingGame.UI
 {
     class CommonData
     {
-        public static readonly string help = "Usage: help, --help, -h, version, --version, -v";
+        public static readonly string help = "Usage: help, version";
         public static readonly string version = "0.0.0";
-        public static readonly string not_found = "Command not found. Usage: help, --help, -h, version, --version, -v";
+        public static readonly string not_found = $"Command not found. {help}";
         public static string ascii_logo { get { return GetAsciiLogo(); } }
         public static string GetAsciiLogo(string text = "")
         {
