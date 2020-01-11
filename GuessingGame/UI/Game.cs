@@ -29,19 +29,23 @@ namespace GuessingGame.UI
         {
             CommonData.ClearAsciiLogoV();
             API api = new API();
-            api.SetMin(CommonData.intput("Enter Min Number: "));
-            api.SetMax(CommonData.intput("Enter Max Number: "));
-            api.SetAllowedGuesses(CommonData.intput("Enter Number of Guesses: "));
-            if (gameMode == GameMode.s)
+            try
             {
-                Console.WriteLine("Choosing correct answer randomly...");
-                api.SetCorrectRandom();
-            } else if (gameMode == GameMode.m)
-            {
-                api.SetCorrect(CommonData.intput("Enter 'Correct' Number: "));
-            }
-            Guess(api);
-            Console.ReadLine();
+                api.SetMin(CommonData.intput("Enter Min Number: "));
+                api.SetMax(CommonData.intput("Enter Max Number: "));
+                api.SetAllowedGuesses(CommonData.intput("Enter Number of Guesses: "));
+                if (gameMode == GameMode.s)
+                {
+                    Console.WriteLine("Choosing correct answer randomly...");
+                    api.SetCorrectRandom();
+                }
+                else if (gameMode == GameMode.m)
+                {
+                    api.SetCorrect(CommonData.intput("Enter 'Correct' Number: "));
+                }
+                Guess(api);
+                Console.ReadLine();
+            } catch (CommonData.QuitException) { }
             UI.Main(new string[0]);
         }
     }

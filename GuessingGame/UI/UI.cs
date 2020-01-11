@@ -7,6 +7,7 @@ namespace GuessingGame.UI
 {
     enum MainMenuCommand
     {
+        args,
         clear,
         license,
         about,
@@ -29,7 +30,10 @@ namespace GuessingGame.UI
                 Command = MainMenu() ?? default;
                 var mainMenuCommand = Command;
                 if (mainMenuCommand == MainMenuCommand.quit)
+                {
+                    Console.Clear();
                     return 0;
+                }
                 if (Command == MainMenuCommand.s)
                     Game.FlexPlayer(GameMode.s);
                 if (Command == MainMenuCommand.m)
@@ -38,6 +42,8 @@ namespace GuessingGame.UI
             }
             else
             {
+                if (argsMainMenuCommand == MainMenuCommand.args)
+                    return 0;
                 Command = argsMainMenuCommand ?? default;
                 if (Command == MainMenuCommand.s)
                     Game.FlexPlayer(GameMode.s);
@@ -107,7 +113,6 @@ namespace GuessingGame.UI
         static void MainMenuDisplay(MainMenuCommand mainMenuCommand = MainMenuCommand.help)
         {
             CommonData.ClearAsciiLogoV();
-            Console.WriteLine("___________________________________________");
             string content = mainMenuCommand switch
             {
                 MainMenuCommand.clear => "",
@@ -126,7 +131,7 @@ namespace GuessingGame.UI
                 (mainMenuCommand == MainMenuCommand.s) |
                 (mainMenuCommand == MainMenuCommand.m))
             {
-                Thread.Sleep(500);
+                Thread.Sleep(200);
             }
         }
     }

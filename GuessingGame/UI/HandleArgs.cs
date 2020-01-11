@@ -8,6 +8,8 @@ namespace GuessingGame.UI
     {
         public static MainMenuCommand? HandleArgs(string[] args)
         {
+            if (args.Length == 0)
+                return null;
             foreach (string arg in args) // Handle all of them, one at a time
             {
                 string help = CommonData.help;
@@ -43,7 +45,7 @@ namespace GuessingGame.UI
                 if (arg == "m")
                     return MainMenuCommand.m;
             }
-            return null;
+            return MainMenuCommand.args;
         }
     }
 }

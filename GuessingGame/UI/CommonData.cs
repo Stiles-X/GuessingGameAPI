@@ -6,7 +6,7 @@ namespace GuessingGame.UI
 {
     class CommonData
     {
-        public static readonly string help = "Usage: (h)elp, (v)ersion, (s)ingle, (m)ulti\n(a)bout, (l)icense, (q)uit, (e)xit, -h, --help, -a, --about\n -v, --version, -l, --license";
+        public static readonly string help = "Usage: (h)elp, (v)ersion, (s)ingle, (m)ulti\n(a)bout, (l)icense, (q)uit, (e)xit";
         public static readonly string version = "0.0.0";
         public static readonly string license = "All rights reserved. (C) 2020.";
         public static readonly string about = "Developed by Github/Stiles-X\nA library for guessing games\nExtensible, and codable\nSampleUIAttached";
@@ -18,6 +18,7 @@ namespace GuessingGame.UI
         {
             Console.Clear();
             Console.WriteLine(AsciiLogoV);
+            Console.WriteLine("___________________________________________");
         }
         public static string GetAsciiLogo(string text = "")
         {
@@ -44,7 +45,9 @@ namespace GuessingGame.UI
         public static int intput(string question)
         {
             string strAnswer = input(question);
+            var s = strAnswer;
             if (strAnswer == "cls" | strAnswer == "clear") { ClearAsciiLogoV(); }
+            if (s == "q" | s == "quit" | s == "e" | s == "exit") { throw new QuitException(); }
             bool CanParse = (int.TryParse(strAnswer, out int intAnswer));
             if (!CanParse)
             {
@@ -53,6 +56,11 @@ namespace GuessingGame.UI
             {
                 return intAnswer;
             }
+        }
+        public class QuitException : Exception
+        {
+            public QuitException() { }
+            public QuitException(string message) : base(message) { }
         }
     }
 }
