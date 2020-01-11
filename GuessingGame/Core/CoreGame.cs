@@ -4,7 +4,7 @@ using System.Text;
 
 namespace GuessingGame.Core
 {
-    class Game
+    class CoreGame
     {
         // Max
         private int? _Max { get; set; }

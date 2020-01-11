@@ -9,7 +9,7 @@ namespace GuessingGame
     {
         public static void TestMain()
         {
-            Game game = new Game
+            CoreGame game = new CoreGame
             {
                 Min = 1,
                 Max = 10,
@@ -21,7 +21,7 @@ namespace GuessingGame
             GuessTest(game.Random(), game);
             Console.Read();
         }
-        public static void GuessTest(int guess, Game game)
+        public static void GuessTest(int guess, CoreGame game)
         {
             Console.WriteLine($"We have {game.AllowedGuesses - game.UsedGuesses} guesses left!");
             bool correct = game.Guess(guess);

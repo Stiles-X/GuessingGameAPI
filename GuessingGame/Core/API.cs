@@ -4,13 +4,15 @@ using System.Text;
 
 namespace GuessingGame.Core
 {
-    class API
+    class SinglePlayer
     {
-        // Game (storing a game instance)
-
-        public API()
+        public SinglePlayer()
         {
-
+            _CoreGame = new CoreGame();
         }
+
+        // Game (storing a game instance)
+        private CoreGame _CoreGame { get; set; }
+
     }
 }
