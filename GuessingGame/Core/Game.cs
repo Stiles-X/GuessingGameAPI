@@ -14,7 +14,7 @@ namespace GuessingGame.Core
             set
             {
                 if (_Min.HasValue) // Check if Min have been set, if so
-                    if (value <= _Min) // Check if the number we are trying to set as max
+                    if (value < _Min) // Check if the number we are trying to set as max
                         throw new ArgumentOutOfRangeException(); // is less than min
                 _Max = value; // Then set _Max as the value
             }
@@ -28,7 +28,7 @@ namespace GuessingGame.Core
             set
             {
                 if (_Max.HasValue) // Check if Max have been set, if so
-                    if (value >= _Max) // Check if the number we are trying to set as min
+                    if (value > _Max) // Check if the number we are trying to set as min
                         throw new ArgumentOutOfRangeException(); // is less than max
                 _Min = value; // Then set _Min as the value
             }
@@ -43,7 +43,7 @@ namespace GuessingGame.Core
             {
                 if (_Max.HasValue & _Min.HasValue) // Check if min or max have been set, if so
                 {
-                    if ((value >= _Max) | (value <= _Min)) // Check if value is {read the code}
+                    if ((value > _Max) | (value < _Min)) // Check if value is {read the code}
                         throw new ArgumentOutOfRangeException(); // value out of range
                     _Correct = value; // Then set
                 }
@@ -55,10 +55,9 @@ namespace GuessingGame.Core
         public bool Guess(int guess)
         {
             if (!_Correct.HasValue)
-            {
-                throw new ArgumentNullException("Max and Min value has not been set");
-            }
-
+                throw new ArgumentNullException("Correct has not been set");
+            if ((guess > _Max) | (guess < _Min))
+                throw new ArgumentOutOfRangeException();
             if (guess == _Correct)
                 return true;
             else

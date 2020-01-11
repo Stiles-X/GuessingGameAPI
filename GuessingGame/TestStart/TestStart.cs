@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Text;
+using GuessingGame.Core;
 
 namespace GuessingGame
 {
@@ -8,7 +9,14 @@ namespace GuessingGame
     {
         public static void TestMain()
         {
-            Console.WriteLine("Hello World");
+            Game game = new Game
+            {
+                Min = 1,
+                Max = 10,
+                Correct = 5
+            };
+            bool correct = game.Guess(6);
+            Console.WriteLine($"The answer is {correct}!");
             Console.Read();
         }
     }
