@@ -6,11 +6,11 @@ namespace GuessingGame.UI
 {
     class CommonData
     {
-        public static readonly string help = "Usage: help, version, (s)ingle, (m)ulti\n       -h, --help, -v, --version";
+        public static readonly string help = "Usage: (h)elp, (v)ersion, (s)ingle, (m)ulti\n(a)bout, (l)icense, -h, --help, -a, --about\n -v, --version, -l, --license";
         public static readonly string version = "0.0.0";
         public static readonly string license = "All rights reserved. (C) 2020.";
         public static readonly string about = "Developed by Github/Stiles-X\nA library for guessing games\nExtensible, and codable\nSampleUIAttached";
-        public static readonly string not_found = $"Command not found. {help}";
+        public static readonly string not_found = $"Command not found.\n{help}";
         public static readonly string s = "Entering single-player game";
         public static readonly string m = "Entering multi-player game";
         public static readonly string AsciiLogoV = GetAsciiLogo("v" + CommonData.version);
