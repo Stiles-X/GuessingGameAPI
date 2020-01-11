@@ -13,11 +13,19 @@ namespace GuessingGame
             {
                 Min = 1,
                 Max = 10,
-                Correct = 5
+                Correct = 5,
+                AllowedGuesses = 5
             };
-            bool correct = game.Guess(6);
-            Console.WriteLine($"The answer is {correct}!");
+            GuessTest(3, game);
+            GuessTest(7, game);
+            GuessTest(5, game);
             Console.Read();
+        }
+        public static void GuessTest(int guess, Game game)
+        {
+            Console.WriteLine($"We have {game.AllowedGuesses - game.UsedGuesses} guesses left!");
+            bool correct = game.Guess(guess);
+            Console.WriteLine($"We guessed {guess.ToString()} and the answer is {correct}!");
         }
     }
 }

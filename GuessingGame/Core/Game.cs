@@ -56,13 +56,23 @@ namespace GuessingGame.Core
         public bool Guess(int guess)
         {
             if (!_Correct.HasValue)
-                throw new ArgumentNullException("guess", "Correct has not been set");
+                throw new ArgumentNullException("Correct", "Correct has not been set");
             if ((guess > _Max) | (guess < _Min))
                 throw new ArgumentOutOfRangeException("guess", "Your guess was outside of max and min range");
-            if (guess == _Correct)
-                return true;
+            if (AllowedGuesses.HasValue)
+            {
+                if (_UsedGuesses >= AllowedGuesses)
+                    throw new ArgumentException("You are out of guesses");
+            }
             else
-                return false;
+                throw new ArgumentNullException("AllowedGuesses", "You haven't set AllowedGuesses yet");
+            bool result;
+            if (guess == _Correct)
+                result = true;
+            else
+                result = false;
+            UsedGuesses = _UsedGuesses + 1;
+            return result;
         }
         // Allowed Guesses (to be use with guess)
         public int? AllowedGuesses { get; set; }
