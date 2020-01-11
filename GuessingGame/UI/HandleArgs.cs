@@ -6,10 +6,8 @@ namespace GuessingGame.UI
 {
     class Args
     {
-        public static string[] HandleArgs(string[] args)
+        public static MainMenuCommand? HandleArgs(string[] args)
         {
-            string[] messages = new string[args.Length];
-            int i = 0;
             foreach (string arg in args) // Handle all of them, one at a time
             {
                 string help = CommonData.help;
@@ -17,6 +15,8 @@ namespace GuessingGame.UI
                 string not_found = CommonData.not_found;
                 string message = arg switch  // Handling command line arguments
                 {
+                    "s" => CommonData.s,
+                    "m" => CommonData.m,
                     "help" => help,
                     "--help" => help,
                     "-h" => help,
@@ -26,10 +26,12 @@ namespace GuessingGame.UI
                     _ => not_found
                 };
                 Console.WriteLine(message);  // Print the value
-                messages.SetValue(message, i);  // Put the value into array
-                i++;  // Increment index
+                if (arg == "s")
+                    return MainMenuCommand.s;
+                if (arg == "m")
+                    return MainMenuCommand.m;
             }
-            return messages;  // return array
+            return null;
         }
     }
 }

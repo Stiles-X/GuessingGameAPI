@@ -4,7 +4,7 @@ namespace GuessingGame
 {
     class Program
     {
-        static void Main(string[] args)
+        public static void FakeMain(string[] args)
         {
             TestStart.TestMain(args);
         }
