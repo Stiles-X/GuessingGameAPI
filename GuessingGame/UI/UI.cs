@@ -7,6 +7,10 @@ namespace GuessingGame.UI
 {
     enum MainMenuCommand
     {
+        args,
+        clear,
+        license,
+        about,
         version,
         help,
         not_found,
@@ -26,7 +30,10 @@ namespace GuessingGame.UI
                 Command = MainMenu() ?? default;
                 var mainMenuCommand = Command;
                 if (mainMenuCommand == MainMenuCommand.quit)
+                {
+                    Console.Clear();
                     return 0;
+                }
                 if (Command == MainMenuCommand.s)
                     Game.FlexPlayer(GameMode.s);
                 if (Command == MainMenuCommand.m)
@@ -35,6 +42,8 @@ namespace GuessingGame.UI
             }
             else
             {
+                if (argsMainMenuCommand == MainMenuCommand.args)
+                    return 0;
                 Command = argsMainMenuCommand ?? default;
                 if (Command == MainMenuCommand.s)
                     Game.FlexPlayer(GameMode.s);
@@ -49,25 +58,41 @@ namespace GuessingGame.UI
         {
             MainMenuCommand mainMenuCommand;
             var help = MainMenuCommand.help;
+            var license = MainMenuCommand.license;
+            var about = MainMenuCommand.about;
             var version = MainMenuCommand.version;
             var not_found = MainMenuCommand.not_found;
             var quit = MainMenuCommand.quit;
             var s = MainMenuCommand.s;
             var m = MainMenuCommand.m;
+            var clear = MainMenuCommand.clear;
             MainMenuDisplay();
             do
             {
                 string command = Console.ReadLine();
                 mainMenuCommand = command switch
                 {
+                    "cls" => clear,
+                    "clear" => clear,
+                    "c" => clear,
                     "s" => s,
                     "m" => m,
                     "help" => help,
                     "--help" => help,
                     "-h" => help,
+                    "h" => help,
+                    "license" => license,
+                    "--license" => license,
+                    "-l" => license,
+                    "l" => license,
+                    "about" => about,
+                    "--about" => about,
+                    "-a" => about,
+                    "a" => about,
                     "version" => version,
                     "--version" => version,
                     "-v" => version,
+                    "v" => version,
                     "quit" => quit,
                     "exit" => quit,
                     "q" => quit,
@@ -75,7 +100,8 @@ namespace GuessingGame.UI
                     _ => not_found
                 };
                 MainMenuDisplay(mainMenuCommand);
-            } while ((mainMenuCommand == help)|(mainMenuCommand == version)|(mainMenuCommand == not_found));
+            } while ((mainMenuCommand == help) | (mainMenuCommand == version) | (mainMenuCommand == not_found) |
+                    (mainMenuCommand == license) | (mainMenuCommand == about) | (mainMenuCommand == clear));
             if (mainMenuCommand == quit)
                 return MainMenuCommand.quit;
             if (mainMenuCommand == s)
@@ -86,14 +112,15 @@ namespace GuessingGame.UI
         }
         static void MainMenuDisplay(MainMenuCommand mainMenuCommand = MainMenuCommand.help)
         {
-            Console.Clear();
-            Console.WriteLine(CommonData.GetAsciiLogo("v" + CommonData.version));
-            Console.WriteLine("__________________________________________");
+            CommonData.ClearAsciiLogoV();
             string content = mainMenuCommand switch
             {
+                MainMenuCommand.clear => "",
                 MainMenuCommand.s => CommonData.s,
                 MainMenuCommand.m => CommonData.m,
                 MainMenuCommand.help => CommonData.help,
+                MainMenuCommand.license => CommonData.license,
+                MainMenuCommand.about => CommonData.about,
                 MainMenuCommand.version => "Version: " + CommonData.version,
                 MainMenuCommand.not_found => CommonData.not_found,
                 MainMenuCommand.quit => "Goodbye",
@@ -104,7 +131,7 @@ namespace GuessingGame.UI
                 (mainMenuCommand == MainMenuCommand.s) |
                 (mainMenuCommand == MainMenuCommand.m))
             {
-                Thread.Sleep(500);
+                Thread.Sleep(200);
             }
         }
     }
