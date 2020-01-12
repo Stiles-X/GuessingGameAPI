@@ -15,16 +15,17 @@ namespace GuessingGame.UI
     {
         private static void Guess(API api)
         {
-            int answer = Misc.intput(
-                    $"{api.GetLeftGuesses()} guesses left. Choose between (including) {api.GetMin()} and {api.GetMax()}: "
-                    );
-            if (api.GetLeftGuesses() > 0)
+            if (api.GetOutOfGuesses()) { Console.WriteLine("Sorry, you ran out of tries"); }
+            else
             {
-                bool Correct = api.Guess(answer);
-                if (Correct) { Console.WriteLine("Congratulations, you did it! Incredible job!"); }
-                else { Guess(api); }
-            }   
-            else { Console.WriteLine("Sorry, you ran out of tries"); }
+            int answer = Misc.intput(
+                $"{api.GetLeftGuesses()} guesses left. Choose between (including) {api.GetMin()} and {api.GetMax()}: "
+                );
+            
+            bool Correct = api.Guess(answer);
+            if (Correct) { Console.WriteLine("Congratulations, you did it! Incredible job!"); }
+            else { Guess(api); }
+            }
         }
 
         public static void SetMin(API api)
@@ -44,16 +45,44 @@ namespace GuessingGame.UI
                 SetMin(api);
             }
         }
+        public static void SetMax(API api)
+        {
+            try
+            {
+                api.SetMax(Misc.intput("Enter Max Number: "));
+            }
+            catch (ForbiddenException)
+            {
+                Console.WriteLine("You have already set Max, and LockMode is 'on'");
+                SetMax(api);
+            }
+            catch (ArgumentOutOfRangeException)
+            {
+                Console.WriteLine("You attempted Max value is less than selected Min, or 'Correct'");
+                SetMax(api);
+            }
+        }
+        public static void SetAllowedGuesses(API api)
+        {
+            try
+            {
+                api.SetAllowedGuesses(Misc.intput("Enter Number of Guesses: "));
+            } catch (ArgumentOutOfRangeException)
+            {
+                Console.WriteLine("Number of guesses can only be whole numbers");
+                SetAllowedGuesses(api);
+            }
+            
+        }
         public static void FlexPlayer(PlayerMode playerMode)
         {
             Misc.ClearAsciiLogoV();
             API api = new API();
             try
             {
-               
-
-                api.SetMax(Misc.intput("Enter Max Number: "));
-                api.SetAllowedGuesses(Misc.intput("Enter Number of Guesses: "));
+                SetMin(api);
+                SetMax(api);
+                SetAllowedGuesses(api);
                 if (playerMode == PlayerMode.s)
                 {
                     Console.WriteLine("Choosing correct answer randomly...");

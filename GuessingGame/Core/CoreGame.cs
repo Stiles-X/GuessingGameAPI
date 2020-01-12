@@ -108,6 +108,7 @@ namespace GuessingGame.Core
                 _UsedGuesses = value;
             }
         }
+        // Left Guesses
         public int LeftGuesses
         {
             get 
@@ -115,6 +116,16 @@ namespace GuessingGame.Core
                 if (!(_AllowedGuesses.HasValue))
                     throw new PropertyNotSetException("AllowedGuesses", "You haven't set AllowedGuesses yet");
                 return (int)_AllowedGuesses - _UsedGuesses; 
+            }
+        }
+        // Out Of Guesses
+        public bool OutOfGuesses
+        {
+            get
+            {
+                if (LeftGuesses > 0) { return false; }
+                else if (LeftGuesses == 0) { return true; }
+                throw new InvalidOperationException("Left guesses can't be negative," + @"https://xkcd.com/2200/");
             }
         }
 

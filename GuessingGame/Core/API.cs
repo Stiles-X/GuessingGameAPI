@@ -30,8 +30,8 @@ namespace GuessingGame.Core
         {
             if (_IsMaxSet & (_LockMode == LockMode.locked))
                 throw new ForbiddenException("Max", "You have already set the max value, and the game mode is locked.");
-            _IsMaxSet = true;
             _CoreGame.Max = Max;
+            _IsMaxSet = true;
         }
 
         // MIN - GET / SET
@@ -41,8 +41,8 @@ namespace GuessingGame.Core
         {
             if (_IsMinSet & (_LockMode == LockMode.locked))
                 throw new ForbiddenException("Min", "You have already set the min value, and the game mode is locked.");
+            _CoreGame.Min = Min;
             _IsMinSet = true;
-            _CoreGame.Min = Min; 
         }
 
         // Correct - GET / SET
@@ -52,8 +52,8 @@ namespace GuessingGame.Core
         {
             if (_IsCorrectSet & (_LockMode == LockMode.locked))  // Checking so that you can only set Correct one time
                 throw new ForbiddenException("Correct", "You have already set the correct answer, and the game mode is locked.");
-            _IsCorrectSet = true;
             _CoreGame.Correct = Correct;
+            _IsCorrectSet = true;
         }
         public void SetCorrectRandom()  // So that you can play single player
         {
@@ -71,7 +71,8 @@ namespace GuessingGame.Core
         public int GetUsedGuesses() { return _CoreGame.UsedGuesses; }
         // Left Guesses - GET
         public int GetLeftGuesses() { return _CoreGame.LeftGuesses; }
-
+        // Out of Guesses - GET
+        public bool GetOutOfGuesses() { return _CoreGame.OutOfGuesses; }
         // Random - GET
         public int GetRandom() { return _CoreGame.Random; }
     }
