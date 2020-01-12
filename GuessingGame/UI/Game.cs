@@ -5,7 +5,7 @@ using GuessingGame.Core;
 
 namespace GuessingGame.UI
 {
-    enum GameMode
+    enum PlayerMode
     {
         s,
         m
@@ -14,7 +14,7 @@ namespace GuessingGame.UI
     {
         private static void Guess(API api)
         {
-            int answer = CommonData.intput(
+            int answer = Misc.intput(
                     $"{api.GetLeftGuesses()} guesses left. Choose between (including) {api.GetMin()} and {api.GetMax()}: "
                     );
             if (api.GetLeftGuesses() > 0)
@@ -25,27 +25,27 @@ namespace GuessingGame.UI
             }   else { Console.WriteLine("Sorry, you ran out of tries"); }
         }
 
-        public static void FlexPlayer(GameMode gameMode)
+        public static void FlexPlayer(PlayerMode playerMode)
         {
-            CommonData.ClearAsciiLogoV();
+            Misc.ClearAsciiLogoV();
             API api = new API();
             try
             {
-                api.SetMin(CommonData.intput("Enter Min Number: "));
-                api.SetMax(CommonData.intput("Enter Max Number: "));
-                api.SetAllowedGuesses(CommonData.intput("Enter Number of Guesses: "));
-                if (gameMode == GameMode.s)
+                api.SetMin(Misc.intput("Enter Min Number: "));
+                api.SetMax(Misc.intput("Enter Max Number: "));
+                api.SetAllowedGuesses(Misc.intput("Enter Number of Guesses: "));
+                if (playerMode == PlayerMode.s)
                 {
                     Console.WriteLine("Choosing correct answer randomly...");
                     api.SetCorrectRandom();
                 }
-                else if (gameMode == GameMode.m)
+                else if (playerMode == PlayerMode.m)
                 {
-                    api.SetCorrect(CommonData.intput("Enter 'Correct' Number: "));
+                    api.SetCorrect(Misc.intput("Enter 'Correct' Number: "));
                 }
                 Guess(api);
                 Console.ReadLine();
-            } catch (CommonData.QuitException) { }
+            } catch (Misc.QuitException) { }
             UI.Main(new string[0]);
         }
     }
