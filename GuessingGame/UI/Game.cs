@@ -131,7 +131,7 @@ namespace GuessingGame.UI
                 }
                 else if (playerMode == PlayerMode.multi) { SetCorrect(api); }
                 Guess(api);
-                Console.ReadLine();
+                Console.ReadKey();
             } catch (Misc.QuitException) { }
             UI.Main(new string[0]);
         }
