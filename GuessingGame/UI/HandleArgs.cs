@@ -12,11 +12,11 @@ namespace GuessingGame.UI
                 return null;
             foreach (string arg in args) // Handle all of them, one at a time
             {
-                string help = CommonData.help;
-                string about = CommonData.about;
-                string license = CommonData.license;
-                string version = CommonData.version;
-                string not_found = CommonData.not_found;
+                string help = Misc.help;
+                string about = Misc.about;
+                string license = Misc.license;
+                string version = Misc.version;
+                string not_found = Misc.not_found;
                 string message = arg switch  // Handling command line arguments
                 {
                     "license" => license,
@@ -27,8 +27,8 @@ namespace GuessingGame.UI
                     "--about" => about,
                     "-a" => about,
                     "a" => about,
-                    "s" => CommonData.s,
-                    "m" => CommonData.m,
+                    "s" => Misc.s,
+                    "m" => Misc.m,
                     "help" => help,
                     "--help" => help,
                     "-h" => help,
