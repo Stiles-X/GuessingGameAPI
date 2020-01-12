@@ -7,8 +7,8 @@ namespace GuessingGame.UI
     class Misc
     {
         public static readonly string help = "Usage: (h)elp, (v)ersion, (s)ingle, (m)ulti\n(a)bout, (l)icense, (q)uit, (e)xit";
-        public static readonly string version = "0.1.0";
-        public static readonly string license = "All rights reserved. (C) 2020.\nWhaat?";
+        public static readonly string version = "0.2.1";
+        public static readonly string license = "All rights reserved. (C) 2020.\nMIT License";
         public static readonly string about = "Developed by Github/Stiles-X\nA library for guessing games\nExtensible, and codable\nSampleUIAttached";
         public static readonly string not_found = $"Command not found.\n{help}";
         public static readonly string s = "Entering single-player game,\nyou know it's fun right?";
