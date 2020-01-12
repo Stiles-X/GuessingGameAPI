@@ -49,11 +49,10 @@ namespace GuessingGame.UI
             bool CanParse = (int.TryParse(strAnswer, out int intAnswer));
             if (!CanParse)
             {
-                return intput(question);
-            } else
-            {
-                return intAnswer;
+                Console.WriteLine("Please enter a valid character");
+                intAnswer = intput(question);
             }
+            return intAnswer;
         }
         public class QuitException : Exception
         {

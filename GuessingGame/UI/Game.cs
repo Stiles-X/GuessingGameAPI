@@ -5,6 +5,7 @@ using GuessingGame.Core;
 
 namespace GuessingGame.UI
 {
+    using Core.Exceptions;
     enum PlayerMode
     {
         s,
@@ -22,16 +23,35 @@ namespace GuessingGame.UI
                 bool Correct = api.Guess(answer);
                 if (Correct) { Console.WriteLine("Congratulations, you did it! Incredible job!"); }
                 else { Guess(api); }
-            }   else { Console.WriteLine("Sorry, you ran out of tries"); }
+            }   
+            else { Console.WriteLine("Sorry, you ran out of tries"); }
         }
 
+        public static void SetMin(API api)
+        {
+            try
+            {
+                api.SetMin(Misc.intput("Enter Min Number: "));
+            }
+            catch (ForbiddenException)
+            {
+                Console.WriteLine("You have already set min, and LockMode is 'on'");
+                SetMin(api);
+            }
+            catch (ArgumentOutOfRangeException)
+            {
+                Console.WriteLine("You attempted min value is more than selected Max, or 'Correct'");
+                SetMin(api);
+            }
+        }
         public static void FlexPlayer(PlayerMode playerMode)
         {
             Misc.ClearAsciiLogoV();
             API api = new API();
             try
             {
-                api.SetMin(Misc.intput("Enter Min Number: "));
+               
+
                 api.SetMax(Misc.intput("Enter Max Number: "));
                 api.SetAllowedGuesses(Misc.intput("Enter Number of Guesses: "));
                 if (playerMode == PlayerMode.s)
