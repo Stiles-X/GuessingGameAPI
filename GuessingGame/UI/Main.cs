@@ -35,9 +35,9 @@ namespace GuessingGame.UI
                     return 0;
                 }
                 if (Command == MainMenuCommand.s)
-                    Game.FlexPlayer(PlayerMode.s);
+                    Game.FlexPlayer(PlayerMode.single);
                 if (Command == MainMenuCommand.m)
-                    Game.FlexPlayer(PlayerMode.m);
+                    Game.FlexPlayer(PlayerMode.multi);
                 return 1;
             }
             else
@@ -46,9 +46,9 @@ namespace GuessingGame.UI
                     return 0;
                 Command = argsMainMenuCommand ?? default;
                 if (Command == MainMenuCommand.s)
-                    Game.FlexPlayer(PlayerMode.s);
+                    Game.FlexPlayer(PlayerMode.single);
                 if (Command == MainMenuCommand.m)
-                    Game.FlexPlayer(PlayerMode.m);
+                    Game.FlexPlayer(PlayerMode.multi);
                 return 0;
             }
         }
@@ -131,7 +131,7 @@ namespace GuessingGame.UI
                 (mainMenuCommand == MainMenuCommand.s) |
                 (mainMenuCommand == MainMenuCommand.m))
             {
-                Thread.Sleep(200);
+                Thread.Sleep(400);
             }
         }
     }
