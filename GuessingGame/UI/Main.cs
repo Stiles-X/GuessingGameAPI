@@ -35,9 +35,9 @@ namespace GuessingGame.UI
                     return 0;
                 }
                 if (Command == MainMenuCommand.s)
-                    Game.FlexPlayer(GameMode.s);
+                    Game.FlexPlayer(PlayerMode.single);
                 if (Command == MainMenuCommand.m)
-                    Game.FlexPlayer(GameMode.m);
+                    Game.FlexPlayer(PlayerMode.multi);
                 return 1;
             }
             else
@@ -46,9 +46,9 @@ namespace GuessingGame.UI
                     return 0;
                 Command = argsMainMenuCommand ?? default;
                 if (Command == MainMenuCommand.s)
-                    Game.FlexPlayer(GameMode.s);
+                    Game.FlexPlayer(PlayerMode.single);
                 if (Command == MainMenuCommand.m)
-                    Game.FlexPlayer(GameMode.m);
+                    Game.FlexPlayer(PlayerMode.multi);
                 return 0;
             }
         }
@@ -112,17 +112,17 @@ namespace GuessingGame.UI
         }
         static void MainMenuDisplay(MainMenuCommand mainMenuCommand = MainMenuCommand.help)
         {
-            CommonData.ClearAsciiLogoV();
+            Misc.ClearAsciiLogoV();
             string content = mainMenuCommand switch
             {
                 MainMenuCommand.clear => "",
-                MainMenuCommand.s => CommonData.s,
-                MainMenuCommand.m => CommonData.m,
-                MainMenuCommand.help => CommonData.help,
-                MainMenuCommand.license => CommonData.license,
-                MainMenuCommand.about => CommonData.about,
-                MainMenuCommand.version => "Version: " + CommonData.version,
-                MainMenuCommand.not_found => CommonData.not_found,
+                MainMenuCommand.s => Misc.s,
+                MainMenuCommand.m => Misc.m,
+                MainMenuCommand.help => Misc.help,
+                MainMenuCommand.license => Misc.license,
+                MainMenuCommand.about => Misc.about,
+                MainMenuCommand.version => "Version: " + Misc.version,
+                MainMenuCommand.not_found => Misc.not_found,
                 MainMenuCommand.quit => "Goodbye",
                 _ => throw new ArgumentException(@"https://xkcd.com/2200/")
             };
@@ -131,7 +131,7 @@ namespace GuessingGame.UI
                 (mainMenuCommand == MainMenuCommand.s) |
                 (mainMenuCommand == MainMenuCommand.m))
             {
-                Thread.Sleep(200);
+                Thread.Sleep(400);
             }
         }
     }

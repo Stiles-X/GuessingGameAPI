@@ -4,7 +4,7 @@ using System.Text;
 
 namespace GuessingGame.UI
 {
-    class CommonData
+    class Misc
     {
         public static readonly string help = "Usage: (h)elp, (v)ersion, (s)ingle, (m)ulti\n(a)bout, (l)icense, (q)uit, (e)xit";
         public static readonly string version = "0.1.0";
@@ -13,7 +13,7 @@ namespace GuessingGame.UI
         public static readonly string not_found = $"Command not found.\n{help}";
         public static readonly string s = "Entering single-player game,\nyou know it's fun right?";
         public static readonly string m = "Entering multi-player game\nand that's a great price!";
-        public static readonly string AsciiLogoV = GetAsciiLogo("v" + CommonData.version);
+        public static readonly string AsciiLogoV = GetAsciiLogo("v" + Misc.version);
         public static void ClearAsciiLogoV()
         {
             Console.Clear();
@@ -49,11 +49,10 @@ namespace GuessingGame.UI
             bool CanParse = (int.TryParse(strAnswer, out int intAnswer));
             if (!CanParse)
             {
-                return intput(question);
-            } else
-            {
-                return intAnswer;
+                Console.WriteLine("Please enter a valid character");
+                intAnswer = intput(question);
             }
+            return intAnswer;
         }
         public class QuitException : Exception
         {
