@@ -6,6 +6,8 @@ using GuessingGame.Core;
 namespace GuessingGame.UI
 {
     using Core.Exceptions;
+    using System.Threading;
+
     enum PlayerMode
     {
         single,
@@ -13,40 +15,33 @@ namespace GuessingGame.UI
     }
     class Game
     {
-        private static bool GuessHarder(API api)
-        {
-            bool Correct;
-            try
-            {
-                int answer = Misc.intput(
-                $"{api.GetLeftGuesses()} Gs left. Guess between {api.GetMax()} and {api.GetMin()}: "
-                );
-                Correct = api.Guess(answer);
-            }
-            catch (PropertyNotSetException)
-            {
-                Console.WriteLine("'Correct' or 'Allowed Guesses' has not been set");
-                Correct = GuessHarder(api);
-            }
-            catch (ArgumentOutOfRangeException)
-            {
-                Console.WriteLine("Your guess was outside of Max and Min range");
-                Correct = GuessHarder(api);
-            }
-            return Correct;
-        }
         private static void Guess(API api)
         {
             if (api.GetOutOfGuesses()) { Console.WriteLine("Sorry, you ran out of tries"); }
             else
             {
-                bool Correct = GuessHarder(api);
-                if (Correct) 
-                { 
-                    Console.WriteLine("Congratulations, you did it!Incredible job!"
-                        +$"\n{Stats(api)}");
+                try
+                {
+                    int answer = Misc.intput($"{api.GetLeftGuesses()} Gs left. " +
+                        $"Guess between {api.GetMax()} and {api.GetMin()}: ");
+                    if (api.Guess(answer))
+                    {
+                        Console.WriteLine("Congratulations, you did it!Incredible job!"
+                            + $"\n{Stats(api)}");
+                        Thread.Sleep(2000);
+                    }
+                    else { Guess(api); }
                 }
-                else { Guess(api); }
+                catch (PropertyNotSetException)
+                {
+                    Console.WriteLine("'Correct' or 'Allowed Guesses' has not been set");
+                    Guess(api);
+                }
+                catch (ArgumentOutOfRangeException)
+                {
+                    Console.WriteLine("Your guess was outside of Max and Min range");
+                    Guess(api);
+                }
             }
         }
         private static string Stats(API api) =>
