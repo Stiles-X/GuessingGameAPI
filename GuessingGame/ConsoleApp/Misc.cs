@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Linq;
 using System.Text;
 
 namespace GuessingGame.UI
@@ -61,8 +62,8 @@ namespace GuessingGame.UI
         {
             string strAnswer = input(question).ToLower();
             var s = strAnswer;
-            if (strAnswer == "cls" | strAnswer == "clear") { ClearAsciiLogoV(); }
-            if (s == "q" | s == "quit" | s == "e" | s == "exit") { throw new QuitException(); }
+            if (new[] { "c", "cls", "clear" }.Any(x => x == s)) { ClearAsciiLogoV(); }
+            if (new[] { "q", "quit", "e", "exit" }.Any(x => x == s)) { throw new QuitException(); }
             bool CanParse = (int.TryParse(strAnswer, out int intAnswer));
             if (!CanParse)
             {

@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Linq;
 using System.Text;
 using System.Threading;
 
@@ -100,8 +101,7 @@ namespace GuessingGame.UI
                     _ => not_found
                 };
                 MainMenuDisplay(mainMenuCommand);
-            } while ((mainMenuCommand == help) | (mainMenuCommand == version) | (mainMenuCommand == not_found) |
-                    (mainMenuCommand == license) | (mainMenuCommand == about) | (mainMenuCommand == clear));
+            } while (new[] { help, version, not_found, license, about, clear }.Any(x => x == mainMenuCommand));
             if (mainMenuCommand == quit)
                 return MainMenuCommand.quit;
             if (mainMenuCommand == s)
@@ -127,9 +127,7 @@ namespace GuessingGame.UI
                 _ => throw new ArgumentException(@"https://xkcd.com/2200/")
             };
             Console.WriteLine(content);
-            if ((mainMenuCommand == MainMenuCommand.quit) |
-                (mainMenuCommand == MainMenuCommand.s) |
-                (mainMenuCommand == MainMenuCommand.m))
+            if (new[] { MainMenuCommand.quit, MainMenuCommand.s, MainMenuCommand.m }.Any(x => x == mainMenuCommand))
             {
                 Thread.Sleep(400);
             }
