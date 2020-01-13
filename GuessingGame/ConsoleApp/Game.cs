@@ -17,6 +17,7 @@ namespace GuessingGame.UI
     {
         private static bool Guess(API api)
         {
+            bool Correct = false;
             if (api.GetOutOfGuesses()) { Console.WriteLine("Sorry, you ran out of tries");}
             else
             {
@@ -24,11 +25,11 @@ namespace GuessingGame.UI
                 {
                     int answer = Misc.intput($"{api.GetLeftGuesses()} Gs left. " +
                         $"Guess between {api.GetMax()} and {api.GetMin()}: ");
-                    if (api.Guess(answer))
+                    Correct = api.Guess(answer);
+                    if (Correct)
                     {
                         Console.WriteLine("Congratulations, you did it!Incredible job!"
                             + $"\n{Stats(api)}");
-                        return true;
                     }
                     else { Guess(api); }
                 }
@@ -43,8 +44,8 @@ namespace GuessingGame.UI
                     Guess(api);
                 }
             }
-            Thread.Sleep(2000);
-            return false;
+            Thread.Sleep(1000);
+            return Correct;
         }
         private static string Stats(API api) =>
             $"From a game of {api.GetAllowedGuesses()} guesses, between {api.GetMax()} and {api.GetMin()},\n"+
@@ -118,6 +119,8 @@ namespace GuessingGame.UI
         {
             Misc.ClearAsciiLogoV();
             API api = new API();
+            if (!api.IsPasswordSet())
+                api.SetPassword("longlongman");
             try
             {
                 if (Max.HasValue) api.SetMax((int)Max);
@@ -140,13 +143,13 @@ namespace GuessingGame.UI
                 Misc.ClearAsciiLogoV();
                 bool GuessCorrect = Guess(api);
                 Misc.ClearAsciiLogoV();
-                QuitOptions(api, GuessCorrect, playerMode, api.GetMax(), api.GetMin(), api.GetCorrect("longlongman"),
+                QuitOptions(api, GuessCorrect, ClearScreen: false, playerMode, api.GetMax(), api.GetMin(), api.GetCorrect("longlongman"),
                     api.GetAllowedGuesses(), api.GetUsedGuesses());
 
             } catch (Misc.QuitException) { }
             UI.Main(new string[0]);
         }
-        private static void QuitOptions(API api, bool GuessCorrect, PlayerMode playerMode = PlayerMode.single,
+        private static void QuitOptions(API api, bool GuessCorrect, bool ClearScreen = false, PlayerMode playerMode = PlayerMode.single,
             int? Max = null, int? Min = null, int? Correct = null,
             int? AllowedGuesses = null, int? UsedGuesses = null)
         {
@@ -160,8 +163,16 @@ namespace GuessingGame.UI
             question += "new (s)ingle player match\n";
             question += "new (m)ulti player match\n";
             question += "(q)uit to main menu\n";
-            string s = Misc.input(question).ToLower();
+            question += "(c)lear screen\n";
+            question += "bring up this (h)elp menu\n";
+            string s = Misc.input(question, !ClearScreen).ToLower();
+            ClearScreen = false;
             if (Misc.Exist(new[] { "c", "cls", "clear" }, s))
+            {
+                Misc.ClearAsciiLogoV();
+                ClearScreen = true;
+            }
+            else if (Misc.Exist(new[] { "h", "help" }, s))
                 Misc.ClearAsciiLogoV();
             else if (Misc.Exist(new[] { "q", "quit", "e", "exit" }, s))
                 throw new Misc.QuitException();
@@ -170,7 +181,7 @@ namespace GuessingGame.UI
             else if (s == "r" & (GuessCorrect))
             {
                 Misc.ClearAsciiLogoV();
-                Console.WriteLine(Stats(api)+"\n");
+                Console.WriteLine(Stats(api) + "\n");
             }
             else if (Misc.Exist(new[] { "t", "tell" }, s))
             {
@@ -193,7 +204,7 @@ namespace GuessingGame.UI
             {
                 Console.WriteLine("Please enter a valid input");
             }
-            QuitOptions(api, GuessCorrect, playerMode, Max, Min, Correct, AllowedGuesses, UsedGuesses);
+            QuitOptions(api, GuessCorrect, ClearScreen, playerMode, Max, Min, Correct, AllowedGuesses, UsedGuesses);
         }
     }
 }

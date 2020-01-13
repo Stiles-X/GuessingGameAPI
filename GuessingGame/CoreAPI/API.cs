@@ -53,15 +53,13 @@ namespace GuessingGame.Core
             if (_LockMode == LockMode.locked)
             {
                 if (string.IsNullOrEmpty(pw))
-                    throw new ForbiddenException("GetCorrect",
-                         "Only code with the correct password is allowed to get correct");
-                else if (ComputeSha256Hash(pw) != _Password)
-                    throw new ForbiddenException("GetCorrect",
-                        "Only code with the correct password is allowed to get correct");
+                    throw new ForbiddenException("GetCorrect", "Wrong Password");
+                else if (ComputeSha256Hash(pw) != GetPassword())
+                    throw new ForbiddenException("GetCorrect", "Wrong Password");
             }
             return _CoreGame.Correct;
         }
-        public static string ComputeSha256Hash(string rawData)
+        private static string ComputeSha256Hash(string rawData)
         {
             // Create a SHA256   
             using SHA256 sha256Hash = SHA256.Create();
@@ -76,7 +74,25 @@ namespace GuessingGame.Core
             }
             return builder.ToString();
         }
-        private string _Password { get { return "d470d7bb2e173792ed0ddc836c319e15af2da1dc1d6b70237d6b70118e48a830"; } }
+        public bool IsPasswordSet()
+        {
+            if (string.IsNullOrEmpty(_Password))
+                return false;
+            return true;
+        }
+        private string GetPassword()
+        {
+            if (string.IsNullOrEmpty(_Password))
+                throw new ForbiddenException("Password", "Set password first");
+            return _Password;
+        }
+        private static string? _Password { get; set; }
+        public void SetPassword(string Password)
+        {
+           if (!String.IsNullOrEmpty(_Password))
+                throw new ForbiddenException("Password", "Can set password only once");
+            _Password = ComputeSha256Hash(Password);
+        }
         private bool _IsCorrectSet { get; set; }
         public void SetCorrect(int Correct)
         {

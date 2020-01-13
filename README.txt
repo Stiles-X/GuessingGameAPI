@@ -62,10 +62,6 @@ function Guess(int) // auto-increments UsedGuesses
 with properties to be used together such as
 	- AllowedGuesses (int?) // How many times you are allowed to guess
 	- UsedGuesses (int) // How many times you have Guess()ed. Starts at 0 by default.
-and helper properties such as
-	- Random (int) ReadOnly // A random int between including Max and Min
-	- LeftGuesses (int) ReadOnly // AllowedGuesses - LeftGuesses
-	- OutOfGuesses (bool) // if (AllowedGuesses - LeftGuesses = 0) is true
 Checks and exceptions have been implemented to avoid wrong things such as (but not only)
 	- Setting Max higher than Min, and vice versa (ArgumentOutOfRangeException)
 	- Setting Correct outside of Max / Min (ArgumentOutOfRangeException)
@@ -76,7 +72,6 @@ Checks and exceptions have been implemented to avoid wrong things such as (but n
 	- Guessing after you are out of guesses (OutOfTriesException*)
 	- Setting AllowedGuesses less than 0 (ArgumentOutOfRangeException)
 	- Setting UsedGuesses less than 0, or more than AllowedGuesses (ArgumentOutOfRangeException)
-	- Getting LeftGuesses without setting AllowedGuesses (PropertyNotSetException*)
 
 Exceptions*
 Custom exceptions are defined in GuessingGame.Core.Exceptions or CoreAPI/Exceptions.cs
@@ -85,15 +80,18 @@ There are 2 of them, and they are -
 	OutOfTriesException : InvalidOperationException  // When you are out of guesses
 
 API
-The 'API' is, as it names implies, the way to interact with a 'CoreGame' model safely.
+
+The 'API' is, as it names implies, the way to interact with the base 'CoreGame' model safely.
+Every instance of an API has a private CoreGame instance created automatically.
 
 Exceptions*
 Custom exceptions are defined in GuessingGame.Core.Exceptions or CoreAPI/Exceptions.cs
-There is 1 of them, and they are -
+There is 2 of them, and they are -
+	PropertyNotSetException : InvalidOperationException // When a required property hasn't been set yet
 	ForbiddenException : InvalidOperationException 
 	// When you try to set max/min/correct/allowedGuesses again
 	// but the game is locked to allow setting only once. OR
-	// When you try to set usedGuesses but the game is locked.
+	// When you try to set usedGuesses but the game is locked and your password is wrong.
 
 About
 				 ^ Guessing Game ^
