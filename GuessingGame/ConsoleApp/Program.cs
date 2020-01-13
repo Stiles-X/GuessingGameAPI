@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Linq;
 using System.Text;
 using System.Threading;
 
@@ -69,39 +70,23 @@ namespace GuessingGame.UI
             MainMenuDisplay();
             do
             {
-                string command = Console.ReadLine();
-                mainMenuCommand = command switch
+                string command = Console.ReadLine().ToLower();
+                if (!Misc.Exist(new[] { "h", "-h", "help", "--help" }, command, help, out mainMenuCommand))
+                if (!Misc.Exist(new[] { "l", "-l", "license", "--license" }, command, license, out mainMenuCommand))
+                if (!Misc.Exist(new[] { "a", "-a", "about", "--about" }, command, about, out mainMenuCommand))
+                if (!Misc.Exist(new[] { "v", "-v", "version", "--version" }, command, version, out mainMenuCommand))
+                if (!Misc.Exist(new[] { "c", "cls", "clear" }, command, clear, out mainMenuCommand))
+                if (!Misc.Exist(new[] { "e", "exit", "q", "quit" }, command, quit, out mainMenuCommand))
                 {
-                    "cls" => clear,
-                    "clear" => clear,
-                    "c" => clear,
-                    "s" => s,
-                    "m" => m,
-                    "help" => help,
-                    "--help" => help,
-                    "-h" => help,
-                    "h" => help,
-                    "license" => license,
-                    "--license" => license,
-                    "-l" => license,
-                    "l" => license,
-                    "about" => about,
-                    "--about" => about,
-                    "-a" => about,
-                    "a" => about,
-                    "version" => version,
-                    "--version" => version,
-                    "-v" => version,
-                    "v" => version,
-                    "quit" => quit,
-                    "exit" => quit,
-                    "q" => quit,
-                    "e" => quit,
-                    _ => not_found
-                };
+                    mainMenuCommand = command switch
+                    {
+                        "s" => s,
+                        "m" => m,
+                        _ => not_found
+                    };
+                }
                 MainMenuDisplay(mainMenuCommand);
-            } while ((mainMenuCommand == help) | (mainMenuCommand == version) | (mainMenuCommand == not_found) |
-                    (mainMenuCommand == license) | (mainMenuCommand == about) | (mainMenuCommand == clear));
+            } while (Misc.Exist(new[] { help, version, not_found, license, about, clear }, mainMenuCommand));
             if (mainMenuCommand == quit)
                 return MainMenuCommand.quit;
             if (mainMenuCommand == s)
@@ -127,11 +112,9 @@ namespace GuessingGame.UI
                 _ => throw new ArgumentException(@"https://xkcd.com/2200/")
             };
             Console.WriteLine(content);
-            if ((mainMenuCommand == MainMenuCommand.quit) |
-                (mainMenuCommand == MainMenuCommand.s) |
-                (mainMenuCommand == MainMenuCommand.m))
+            if (Misc.Exist(new[] { MainMenuCommand.quit, MainMenuCommand.s, MainMenuCommand.m }, mainMenuCommand))
             {
-                Thread.Sleep(400);
+                Thread.Sleep(350);
             }
         }
     }
