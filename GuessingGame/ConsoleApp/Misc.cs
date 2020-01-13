@@ -15,15 +15,15 @@ namespace GuessingGame.UI
                                               " A core API to get up to speed with making \n"+
                                               "        above-average GuessingGames.       \n\n"+
                                               "Features:                                  \n"+
-                                              "  Fully error handled                      \n"+
-                                              "  Just enough functions, for customization \n"+
-                                              "  Amazing sample Console UI implementation \n"+
-                                              "  Have docs/ manpage. RTFM or --help       \n"+
-                                              "  Made by passionate developer <3          \n\n"+
+                                              "  -Fully error handled                     \n"+
+                                              "  -Just enough functions, for customization\n"+
+                                              "  -Amazing sample Console UI implementation\n"+
+                                              "  -Have docs/ manpage. RTFM or --help      \n"+
+                                              "  -Made by passionate developer <3         \n\n"+
                                               "Special thanks :                           \n" +
                                               "  To my family for the support. PewDiePie  \n" +
                                               "for the entertainment. To HTMLDog, for the \n" +
-                                              "first taste into code and Mosh, for first  \n" +
+                                              "first wander into code and Mosh, for first \n" +
                                               "programming in python. To FCC, TimCorey,   \n" +
                                               "Mark P., and more, and Reddit,StackOverflow\n" +
                                               "and the internet. Thank you all <3         \n"
