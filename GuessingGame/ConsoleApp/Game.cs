@@ -28,7 +28,7 @@ namespace GuessingGame.UI
                     {
                         Console.WriteLine("Congratulations, you did it!Incredible job!"
                             + $"\n{Stats(api)}");
-                        Thread.Sleep(2000); return true;
+                        return true;
                     }
                     else { Guess(api); }
                 }
@@ -43,6 +43,7 @@ namespace GuessingGame.UI
                     Guess(api);
                 }
             }
+            Thread.Sleep(2000);
             return false;
         }
         private static string Stats(API api) =>
@@ -152,6 +153,8 @@ namespace GuessingGame.UI
             string question = string.Empty;
             if (!GuessCorrect)
                 question += "(o)ne more guess please\n";
+            else
+                question += "(r)esult of the match\n";
             question += "(t)ell correct answer\n";
             question += "play (a)gain, same answer\n";
             question += "new (s)ingle player match\n";
@@ -164,6 +167,11 @@ namespace GuessingGame.UI
                 throw new Misc.QuitException();
             else if (s == "o" & (!GuessCorrect))
                 FlexPlayer(playerMode, Max, Min, Correct, AllowedGuesses + 1, UsedGuesses);
+            else if (s == "r" & (GuessCorrect))
+            {
+                Misc.ClearAsciiLogoV();
+                Console.WriteLine(Stats(api)+"\n");
+            }
             else if (Misc.Exist(new[] { "t", "tell" }, s))
             {
                 Misc.ClearAsciiLogoV();
@@ -172,6 +180,14 @@ namespace GuessingGame.UI
             else if (Misc.Exist(new[] { "a", "again" }, s))
             {
                 FlexPlayer(playerMode, Max, Min, Correct, AllowedGuesses);
+            }
+            else if (Misc.Exist(new[] { "s", "single" }, s))
+            {
+                FlexPlayer(PlayerMode.single);
+            }
+            else if (Misc.Exist(new[] { "m", "multi" }, s))
+            {
+                FlexPlayer(PlayerMode.multi);
             }
             else
             {
