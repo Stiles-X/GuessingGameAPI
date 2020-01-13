@@ -167,7 +167,11 @@ namespace GuessingGame.UI
             else if (Misc.Exist(new[] { "t", "tell" }, s))
             {
                 Misc.ClearAsciiLogoV();
-                Console.WriteLine("Correct answer is: " + api.GetCorrect(pw: "longlongman")+"\n");
+                Console.WriteLine("Correct answer is: " + api.GetCorrect(pw: "longlongman") + "\n");
+            }
+            else if (Misc.Exist(new[] { "a", "again" }, s))
+            {
+                FlexPlayer(playerMode, Max, Min, Correct, AllowedGuesses);
             }
             else
             {
