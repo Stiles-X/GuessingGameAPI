@@ -75,6 +75,8 @@ Checks and exceptions have been implemented to avoid wrong things such as (but n
 	- Guessing Outside Of Max / Min (ArgumentOutOfRangeException)
 	- Guessing after you are out of guesses (OutOfTriesException*)
 	- Setting AllowedGuesses less than 0 (ArgumentOutOfRangeException)
+	- Setting UsedGuesses less than 0, or more than AllowedGuesses (ArgumentOutOfRangeException)
+	- Getting LeftGuesses without setting AllowedGuesses (PropertyNotSetException*)
 
 Exceptions*
 Custom exceptions are defined in GuessingGame.Core.Exceptions or CoreAPI/Exceptions.cs

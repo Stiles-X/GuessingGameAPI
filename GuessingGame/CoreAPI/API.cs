@@ -57,7 +57,7 @@ namespace GuessingGame.Core
         }
         public void SetCorrectRandom()  // So that you can play single player
         {
-            SetCorrect(_CoreGame.Random);
+            SetCorrect(GetRandom());
         }
 
         // Guess
@@ -84,10 +84,27 @@ namespace GuessingGame.Core
         }
 
         // Left Guesses - GET
-        public int GetLeftGuesses() { return _CoreGame.LeftGuesses; }
+        public int GetLeftGuesses()
+        {
+            if (!(GetAllowedGuesses().HasValue))
+                throw new PropertyNotSetException("AllowedGuesses", "You haven't set AllowedGuesses yet");
+            return (int)GetAllowedGuesses() - GetUsedGuesses();
+        }
         // Out of Guesses - GET
-        public bool GetOutOfGuesses() { return _CoreGame.OutOfGuesses; }
+        public bool GetOutOfGuesses()
+        {
+            if (GetLeftGuesses() > 0) { return false; }
+            else if (GetLeftGuesses() == 0) { return true; }
+            throw new InvalidOperationException("Left guesses can't be negative," + @"https://xkcd.com/2200/");
+        }
         // Random - GET
-        public int GetRandom() { return _CoreGame.Random; }
+        public int GetRandom()
+        {
+            if (!(GetMax().HasValue)) // Check if min or max have been set, if so
+                throw new PropertyNotSetException("Max", "Max value has not been set");
+            if (!(GetMin().HasValue))
+                throw new PropertyNotSetException("Min", "Min value has not been set");
+            return new System.Random().Next((int)GetMin(), (int)GetMax() + 1); // Our guessing game max is inclusive, rand's max is exclusive so we must plus 1
+        }
     }
 }

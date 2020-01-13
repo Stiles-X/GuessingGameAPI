@@ -108,38 +108,5 @@ namespace GuessingGame.Core
                 _UsedGuesses = value;
             }
         }
-        // Left Guesses
-        public int LeftGuesses
-        {
-            get 
-            {
-                if (!(_AllowedGuesses.HasValue))
-                    throw new PropertyNotSetException("AllowedGuesses", "You haven't set AllowedGuesses yet");
-                return (int)_AllowedGuesses - _UsedGuesses; 
-            }
-        }
-        // Out Of Guesses
-        public bool OutOfGuesses
-        {
-            get
-            {
-                if (LeftGuesses > 0) { return false; }
-                else if (LeftGuesses == 0) { return true; }
-                throw new InvalidOperationException("Left guesses can't be negative," + @"https://xkcd.com/2200/");
-            }
-        }
-
-        // Random (generate a valid int guess from max min range)
-        public int Random
-        {
-            get
-            {
-                if (!(_Max.HasValue)) // Check if min or max have been set, if so
-                    throw new PropertyNotSetException("Max", "Max value has not been set");
-                if (!(_Min.HasValue))
-                    throw new PropertyNotSetException("Min", "Min value has not been set");
-                return new System.Random().Next((int)_Min, (int)_Max + 1); // Our guessing game max is inclusive, rand's max is exclusive so we must plus 1
-            }
-        }
     }
 }
