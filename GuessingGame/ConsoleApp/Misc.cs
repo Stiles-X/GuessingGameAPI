@@ -79,9 +79,10 @@ namespace GuessingGame.UI
                 return true;
             return false;
         }
-        public static string input(string question)
+        public static string input(string question, bool writeQuestion = true)
         {
-            Console.Write(question);
+            if (writeQuestion)
+                Console.Write(question);
             return Console.ReadLine();
         }
         public static int intput(string question)
