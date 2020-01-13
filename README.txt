@@ -1,4 +1,4 @@
-GuessingGame - API -- ReadMe
+GuessingGame - API v0.3.0 PreRelease 1 -- ReadMe 
 
 Contents
 - Contents
@@ -32,7 +32,7 @@ License
 	SOFTWARE.
 
 
-Documentation / Manual v0.1.0 (GuessingGame v0.1.2)
+Documentation / Manual v0.1.0 (GuessingGame v0.2.1) //Unfinished! Will update to new structure after prerelease
 
 - Introduction
 - CoreAPI
