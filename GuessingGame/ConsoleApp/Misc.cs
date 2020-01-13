@@ -53,6 +53,32 @@ namespace GuessingGame.UI
  | |__| | (_| | | | | | |  __/             
   \_____|\__,_|_| |_| |_|\___|   " + $"{text}";
         }
+        public static bool Exist(string[] pattern, string matcher, MainMenuCommand value, out MainMenuCommand valueOut)
+        {
+            valueOut = value;
+            if (Exist(pattern, matcher))
+                return true;
+            return false;
+        }
+        public static bool Exist(string[] pattern, string matcher, string value, out string valueOut)
+        {
+            valueOut = value;
+            if (Exist(pattern, matcher))
+                return true;
+            return false;
+        }
+        public static bool Exist(string[] pattern, string matcher)
+        {
+            if (pattern.Any(x => x == matcher))
+                return true;
+            return false;
+        }
+        public static bool Exist(MainMenuCommand[] pattern, MainMenuCommand matcher)
+        {
+            if (pattern.Any(x => x == matcher))
+                return true;
+            return false;
+        }
         public static string input(string question)
         {
             Console.Write(question);
@@ -62,8 +88,10 @@ namespace GuessingGame.UI
         {
             string strAnswer = input(question).ToLower();
             var s = strAnswer;
-            if (new[] { "c", "cls", "clear" }.Any(x => x == s)) { ClearAsciiLogoV(); }
-            if (new[] { "q", "quit", "e", "exit" }.Any(x => x == s)) { throw new QuitException(); }
+            if (Exist(new[] { "c", "cls", "clear" }, s))
+                ClearAsciiLogoV();
+            if (Exist(new[] { "q", "quit", "e", "exit" }, s))
+                throw new QuitException();
             bool CanParse = (int.TryParse(strAnswer, out int intAnswer));
             if (!CanParse)
             {

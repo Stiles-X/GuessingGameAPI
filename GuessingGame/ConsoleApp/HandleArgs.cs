@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Linq;
 using System.Text;
 
 namespace GuessingGame.UI
@@ -10,35 +11,29 @@ namespace GuessingGame.UI
         {
             if (args.Length == 0)
                 return null;
-            foreach (string arg in args) // Handle all of them, one at a time
+            foreach (string argI in args) // Handle all of them, one at a time
             {
                 string help = Misc.help;
                 string about = Misc.about;
                 string license = Misc.license;
                 string version = Misc.version;
                 string not_found = Misc.not_found;
-                string message = arg.ToLower() switch  // Handling command line arguments
+
+                string arg = argI.ToLower();
+                string message;
+                // Handling command line arguments
+                if (!Misc.Exist(new[] { "h", "-h", "help", "--help" }, arg, help, out message))
+                if (!Misc.Exist(new[] { "l", "-l", "license", "--license" }, arg, license, out message))
+                if (!Misc.Exist(new[] { "a", "-a", "about", "--about" }, arg, about, out message))
+                if (!Misc.Exist(new[] { "v", "-v", "version", "--version" }, arg, version, out message))
                 {
-                    "license" => license,
-                    "--license" => license,
-                    "-l" => license,
-                    "l" => license,
-                    "about" => about,
-                    "--about" => about,
-                    "-a" => about,
-                    "a" => about,
-                    "s" => Misc.s,
-                    "m" => Misc.m,
-                    "help" => help,
-                    "--help" => help,
-                    "-h" => help,
-                    "h" => help,
-                    "version" => version,
-                    "--version" => version,
-                    "-v" => version,
-                    "v" => version,
-                    _ => not_found
-                };
+                    message = arg switch
+                    {
+                        "s" => Misc.s,
+                        "m" => Misc.m,
+                        _ => not_found
+                    };
+                }
                 Console.WriteLine(message);  // Print the value
                 if (arg == "s")
                     return MainMenuCommand.s;
