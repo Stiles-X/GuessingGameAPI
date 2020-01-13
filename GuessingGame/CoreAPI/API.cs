@@ -1,10 +1,12 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Text;
-
+#nullable enable
 namespace GuessingGame.Core
 {
     using Exceptions;
+    using System.Security.Cryptography;
+
     public enum LockMode
     {
         unlocked, // Single-Player
@@ -46,7 +48,35 @@ namespace GuessingGame.Core
         }
 
         // Correct - GET / SET
-        public int? GetCorrect() { return _CoreGame.Correct; }
+        public int? GetCorrect(string? pw = "")
+        {
+            if (_LockMode == LockMode.locked)
+            {
+                if (string.IsNullOrEmpty(pw))
+                    throw new ForbiddenException("GetCorrect",
+                         "Only code with the correct password is allowed to get correct");
+                else if (ComputeSha256Hash(pw) != _Password)
+                    throw new ForbiddenException("GetCorrect",
+                        "Only code with the correct password is allowed to get correct");
+            }
+            return _CoreGame.Correct;
+        }
+        public static string ComputeSha256Hash(string rawData)
+        {
+            // Create a SHA256   
+            using SHA256 sha256Hash = SHA256.Create();
+            // ComputeHash - returns byte array  
+            byte[] bytes = sha256Hash.ComputeHash(Encoding.UTF8.GetBytes(rawData));
+
+            // Convert byte array to a string   
+            StringBuilder builder = new StringBuilder();
+            for (int i = 0; i < bytes.Length; i++)
+            {
+                builder.Append(bytes[i].ToString("x2"));
+            }
+            return builder.ToString();
+        }
+        private string _Password { get { return "d470d7bb2e173792ed0ddc836c319e15af2da1dc1d6b70237d6b70118e48a830"; } }
         private bool _IsCorrectSet { get; set; }
         public void SetCorrect(int Correct)
         {

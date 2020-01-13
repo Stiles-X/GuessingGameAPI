@@ -139,13 +139,13 @@ namespace GuessingGame.UI
                 Misc.ClearAsciiLogoV();
                 bool GuessCorrect = Guess(api);
                 Misc.ClearAsciiLogoV();
-                QuitOptions(GuessCorrect, playerMode, api.GetMax(), api.GetMin(), api.GetCorrect(),
+                QuitOptions(api, GuessCorrect, playerMode, api.GetMax(), api.GetMin(), api.GetCorrect("longlongman"),
                     api.GetAllowedGuesses(), api.GetUsedGuesses());
 
             } catch (Misc.QuitException) { }
             UI.Main(new string[0]);
         }
-        private static void QuitOptions(bool GuessCorrect, PlayerMode playerMode = PlayerMode.single,
+        private static void QuitOptions(API api, bool GuessCorrect, PlayerMode playerMode = PlayerMode.single,
             int? Max = null, int? Min = null, int? Correct = null,
             int? AllowedGuesses = null, int? UsedGuesses = null)
         {
@@ -164,11 +164,16 @@ namespace GuessingGame.UI
                 throw new Misc.QuitException();
             else if (s == "o" & (!GuessCorrect))
                 FlexPlayer(playerMode, Max, Min, Correct, AllowedGuesses + 1, UsedGuesses);
+            else if (Misc.Exist(new[] { "t", "tell" }, s))
+            {
+                Misc.ClearAsciiLogoV();
+                Console.WriteLine("Correct answer is: " + api.GetCorrect(pw: "longlongman")+"\n");
+            }
             else
             {
                 Console.WriteLine("Please enter a valid input");
-                QuitOptions(GuessCorrect, playerMode, Max, Min, Correct, AllowedGuesses, UsedGuesses);
             }
+            QuitOptions(api, GuessCorrect, playerMode, Max, Min, Correct, AllowedGuesses, UsedGuesses);
         }
     }
 }

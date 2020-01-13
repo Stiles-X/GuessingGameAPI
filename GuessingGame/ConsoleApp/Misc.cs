@@ -100,6 +100,7 @@ namespace GuessingGame.UI
             }
             return intAnswer;
         }
+        
         public class QuitException : Exception
         {
             public QuitException() { }
