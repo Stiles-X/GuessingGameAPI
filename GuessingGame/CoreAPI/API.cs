@@ -65,10 +65,24 @@ namespace GuessingGame.Core
 
         // TO BE USED WITH GUESS
         // Allowed Guesses - GET / SET
-        public void SetAllowedGuesses(int amount) { _CoreGame.AllowedGuesses = amount; }
         public int? GetAllowedGuesses() { return _CoreGame.AllowedGuesses; }
-        // Used Guesses - GET
+        public void SetAllowedGuesses(int amount)
+        {
+            if (_IsAllowedGuessesSet & (_LockMode == LockMode.locked))  // Checking so that you can only set AllowedGuesses one time
+                throw new ForbiddenException("AllowedGuesses", "You have already set the allowed guesses, and the game mode is locked.");
+            _CoreGame.AllowedGuesses = amount;
+            _IsAllowedGuessesSet = true;
+        }
+        private bool _IsAllowedGuessesSet { get; set; }
+        // Used Guesses - GET / SET
         public int GetUsedGuesses() { return _CoreGame.UsedGuesses; }
+        public void SetUsedGuesses(int amount)
+        {
+            if ((_LockMode == LockMode.locked))  // Checking so that you can only set UsedGuesses one time
+                throw new ForbiddenException("UsedGuesses", "The game mode is locked.");
+            _CoreGame.UsedGuesses = amount;
+        }
+
         // Left Guesses - GET
         public int GetLeftGuesses() { return _CoreGame.LeftGuesses; }
         // Out of Guesses - GET

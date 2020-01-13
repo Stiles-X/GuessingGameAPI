@@ -32,13 +32,15 @@ License
 	SOFTWARE.
 
 
-Documentation / Manual
+Documentation / Manual v0.1.0 (GuessingGame v0.1.2)
 
 - Introduction
 - CoreAPI
 -- CoreGame
+--- Exceptions
 -- API
--- Exceptions
+--- Enums
+--- Exceptions
 - ConsoleApp
 
 This project is made up of 2 parts. The 'CoreAPI' and 'ConsoleApp'.
@@ -47,6 +49,7 @@ The 'ConsoleApp' is an implementation using the 'CoreAPI'.
 In other words, 'ConsoleApp' is a 'UI'/'front-end' over 'CoreAPI'.
 
 The 'CoreAPI' is amde up of 2 parts. The 'API' and 'CoreGame'.
+The 'CoreAPI' can be used as a base for other implementation, and can be used in code.
 
 CoreGame
 
@@ -58,27 +61,37 @@ It has properties such as
 function Guess(int) // auto-increments UsedGuesses
 with properties to be used together such as
 	- AllowedGuesses (int?) // How many times you are allowed to guess
-	- UsedGuesses (int) // How many times you have Guess()ed.
+	- UsedGuesses (int) // How many times you have Guess()ed. Starts at 0 by default.
 and helper properties such as
 	- Random (int) ReadOnly // A random int between including Max and Min
 	- LeftGuesses (int) ReadOnly // AllowedGuesses - LeftGuesses
 	- OutOfGuesses (bool) // if (AllowedGuesses - LeftGuesses = 0) is true
 Checks and exceptions have been implemented to avoid wrong things such as (but not only)
 	- Setting Max higher than Min, and vice versa (ArgumentOutOfRangeException)
-	- Setting Correct outside of Max / Min
-	- Setting Correct before setting Max / Min (Custom* PropertyNotSetException | InvalidOperationException)
-	- Setting Max lower than Correct, or Min higher than Correct, after setting Correct
-	- Guessing Outside Of
+	- Setting Correct outside of Max / Min (ArgumentOutOfRangeException)
+	- Setting Correct before setting Max / Min (PropertyNotSetException*)
+	- Setting Max lower than Correct, or Min higher than Correct, after setting Correct (ArgumentOutOfRangeException)
+	- Guessing without setting Correct and / or AllowedGuesses (PropertyNotSetException*)
+	- Guessing Outside Of Max / Min (ArgumentOutOfRangeException)
+	- Guessing after you are out of guesses (OutOfTriesException*)
+	- Setting AllowedGuesses less than 0 (ArgumentOutOfRangeException)
+
+Exceptions*
+Custom exceptions are defined in GuessingGame.Core.Exceptions or CoreAPI/Exceptions.cs
+There are 2 of them, and they are -
+	PropertyNotSetException : InvalidOperationException // When a required property hasn't been set yet
+	OutOfTriesException : InvalidOperationException  // When you are out of guesses
 
 API
 The 'API' is, as it names implies, the way to interact with a 'CoreGame' model safely.
 
-Exceptions
-Exceptions are defined in GuessingGame.Core.Exceptions or CoreAPI/Exceptions.cs
-There are 3 of them, and they are -
-	PropertyNotSetException : InvalidOperationException // When a required property hasn't been set yet
-	OutOfTriesException : InvalidOperationException  // When you are out of guesses
-	ForbiddenException : InvalidOperationException  // When you are
+Exceptions*
+Custom exceptions are defined in GuessingGame.Core.Exceptions or CoreAPI/Exceptions.cs
+There is 1 of them, and they are -
+	ForbiddenException : InvalidOperationException 
+	// When you try to set max/min/correct/allowedGuesses again
+	// but the game is locked to allow setting only once. OR
+	// When you try to set usedGuesses but the game is locked.
 
 About
 				 ^ Guessing Game ^
