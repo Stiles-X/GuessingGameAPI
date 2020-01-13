@@ -78,10 +78,14 @@ namespace GuessingGame.Core
         public int GetUsedGuesses() { return _CoreGame.UsedGuesses; }
         public void SetUsedGuesses(int amount)
         {
-            if ((_LockMode == LockMode.locked))  // Checking so that you can only set UsedGuesses one time
+            if (_IsUsedGuessesSet & (_LockMode == LockMode.locked))  // Checking so that you can only set UsedGuesses one time
                 throw new ForbiddenException("UsedGuesses", "The game mode is locked.");
+            int temp = GetUsedGuesses();
             _CoreGame.UsedGuesses = amount;
+            if (temp != amount)
+                _IsUsedGuessesSet = true;
         }
+        private bool _IsUsedGuessesSet { get; set; }
 
         // Left Guesses - GET
         public int GetLeftGuesses()

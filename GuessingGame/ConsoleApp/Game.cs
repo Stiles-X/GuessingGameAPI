@@ -15,9 +15,9 @@ namespace GuessingGame.UI
     }
     class Game
     {
-        private static void Guess(API api)
+        private static bool Guess(API api)
         {
-            if (api.GetOutOfGuesses()) { Console.WriteLine("Sorry, you ran out of tries"); }
+            if (api.GetOutOfGuesses()) { Console.WriteLine("Sorry, you ran out of tries");}
             else
             {
                 try
@@ -28,7 +28,7 @@ namespace GuessingGame.UI
                     {
                         Console.WriteLine("Congratulations, you did it!Incredible job!"
                             + $"\n{Stats(api)}");
-                        Thread.Sleep(2000);
+                        Thread.Sleep(2000); return true;
                     }
                     else { Guess(api); }
                 }
@@ -43,6 +43,7 @@ namespace GuessingGame.UI
                     Guess(api);
                 }
             }
+            return false;
         }
         private static string Stats(API api) =>
             $"From a game of {api.GetAllowedGuesses()} guesses, between {api.GetMax()} and {api.GetMin()},\n"+
@@ -111,8 +112,8 @@ namespace GuessingGame.UI
             }
 
         }
-        public static void FlexPlayer(PlayerMode playerMode = PlayerMode.single, 
-            int? Max = null, int? Min = null, int? Correct = null, int ? AllowedGuesses = null)
+        public static void FlexPlayer(PlayerMode playerMode = PlayerMode.single, int? Max = null,
+            int? Min = null, int? Correct = null, int? AllowedGuesses = null, int? UsedGuesses = null)
         {
             Misc.ClearAsciiLogoV();
             API api = new API();
@@ -134,15 +135,40 @@ namespace GuessingGame.UI
                 }
                 if (AllowedGuesses.HasValue) api.SetAllowedGuesses((int)AllowedGuesses);
                 else SetAllowedGuesses(api);
+                if (UsedGuesses.HasValue) api.SetUsedGuesses((int)UsedGuesses);
                 Misc.ClearAsciiLogoV();
-                Guess(api);
-
+                bool GuessCorrect = Guess(api);
                 Misc.ClearAsciiLogoV();
-                Console.WriteLine();
-                Console.ReadLine();
+                QuitOptions(GuessCorrect, playerMode, api.GetMax(), api.GetMin(), api.GetCorrect(),
+                    api.GetAllowedGuesses(), api.GetUsedGuesses());
 
             } catch (Misc.QuitException) { }
             UI.Main(new string[0]);
+        }
+        private static void QuitOptions(bool GuessCorrect, PlayerMode playerMode = PlayerMode.single,
+            int? Max = null, int? Min = null, int? Correct = null,
+            int? AllowedGuesses = null, int? UsedGuesses = null)
+        {
+            string question = string.Empty;
+            if (!GuessCorrect)
+                question += "(o)ne more guess please\n";
+            question += "(t)ell correct answer\n";
+            question += "play (a)gain, same answer\n";
+            question += "new (s)ingle player match\n";
+            question += "new (m)ulti player match\n";
+            question += "(q)uit to main menu\n";
+            string s = Misc.input(question).ToLower();
+            if (Misc.Exist(new[] { "c", "cls", "clear" }, s))
+                Misc.ClearAsciiLogoV();
+            else if (Misc.Exist(new[] { "q", "quit", "e", "exit" }, s))
+                throw new Misc.QuitException();
+            else if (s == "o" & (!GuessCorrect))
+                FlexPlayer(playerMode, Max, Min, Correct, AllowedGuesses + 1, UsedGuesses);
+            else
+            {
+                Console.WriteLine("Please enter a valid input");
+                QuitOptions(GuessCorrect, playerMode, Max, Min, Correct, AllowedGuesses, UsedGuesses);
+            }
         }
     }
 }
