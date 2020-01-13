@@ -17,7 +17,7 @@ namespace GuessingGame.UI
                 string license = Misc.license;
                 string version = Misc.version;
                 string not_found = Misc.not_found;
-                string message = arg switch  // Handling command line arguments
+                string message = arg.ToLower() switch  // Handling command line arguments
                 {
                     "license" => license,
                     "--license" => license,

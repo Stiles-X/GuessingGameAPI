@@ -59,7 +59,7 @@ namespace GuessingGame.UI
         }
         public static int intput(string question)
         {
-            string strAnswer = input(question);
+            string strAnswer = input(question).ToLower();
             var s = strAnswer;
             if (strAnswer == "cls" | strAnswer == "clear") { ClearAsciiLogoV(); }
             if (s == "q" | s == "quit" | s == "e" | s == "exit") { throw new QuitException(); }

@@ -69,7 +69,7 @@ namespace GuessingGame.UI
             MainMenuDisplay();
             do
             {
-                string command = Console.ReadLine();
+                string command = Console.ReadLine().ToLower();
                 mainMenuCommand = command switch
                 {
                     "cls" => clear,

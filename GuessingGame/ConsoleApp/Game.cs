@@ -43,15 +43,15 @@ namespace GuessingGame.UI
                 bool Correct = GuessHarder(api);
                 if (Correct) 
                 { 
-                    Console.WriteLine("Congratulations, you did it! Incredible job!"
-                        +"\n"
-                        +$"From a game of {api.GetAllowedGuesses()} guesses, between {api.GetMax()} and {api.GetMin()},"
-                        +$"You won with {api.GetUsedGuesses()} guesses or {api.GetLeftGuesses()} guesses left");
+                    Console.WriteLine("Congratulations, you did it!Incredible job!"
+                        +$"\n{Stats(api)}");
                 }
                 else { Guess(api); }
             }
         }
-
+        private static string Stats(API api) =>
+            $"From a game of {api.GetAllowedGuesses()} guesses, between {api.GetMax()} and {api.GetMin()},\n"+
+            $"You won with {api.GetUsedGuesses()} guesses or {api.GetLeftGuesses()} guesses left";
         private static void SetMin(API api)
         {
             try
@@ -116,24 +116,36 @@ namespace GuessingGame.UI
             }
 
         }
-        public static void FlexPlayer(PlayerMode playerMode)
+        public static void FlexPlayer(PlayerMode playerMode = PlayerMode.single, 
+            int? Max = null, int? Min = null, int? Correct = null, int ? AllowedGuesses = null)
         {
             Misc.ClearAsciiLogoV();
             API api = new API();
             try
             {
-                SetMax(api);
-                SetMin(api);
-                SetAllowedGuesses(api);
-                if (playerMode == PlayerMode.single)
+                if (Max.HasValue) api.SetMax((int)Max);
+                else SetMax(api);
+                if (Min.HasValue) api.SetMin((int)Min);
+                else SetMin(api);
+                if (Correct.HasValue) api.SetCorrect((int)Correct);
+                else
                 {
-                    Console.WriteLine("Choosing correct answer randomly...");
-                    api.SetCorrectRandom();
+                    if (playerMode == PlayerMode.single)
+                    {
+                        Console.WriteLine("Choosing correct answer randomly...");
+                        api.SetCorrectRandom();
+                    }
+                    else if (playerMode == PlayerMode.multi) { SetCorrect(api); }
                 }
-                else if (playerMode == PlayerMode.multi) { SetCorrect(api); }
+                if (AllowedGuesses.HasValue) api.SetAllowedGuesses((int)AllowedGuesses);
+                else SetAllowedGuesses(api);
                 Misc.ClearAsciiLogoV();
                 Guess(api);
-                Console.ReadKey();
+
+                Misc.ClearAsciiLogoV();
+                Console.WriteLine();
+                Console.ReadLine();
+
             } catch (Misc.QuitException) { }
             UI.Main(new string[0]);
         }
