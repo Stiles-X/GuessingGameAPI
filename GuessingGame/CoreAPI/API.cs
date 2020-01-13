@@ -156,5 +156,6 @@ namespace GuessingGame.Core
                 throw new PropertyNotSetException("Min", "Min value has not been set");
             return new System.Random().Next((int)GetMin(), (int)GetMax() + 1); // Our guessing game max is inclusive, rand's max is exclusive so we must plus 1
         }
+        public string Version { get { return "0.3.0 - PreRelease 1"; } }
     }
 }

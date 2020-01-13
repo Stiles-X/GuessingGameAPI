@@ -9,7 +9,7 @@ namespace GuessingGame.UI
     {
         public static readonly string help =  "Usage: (h)elp, (v)ersion, (s)ingle, (m)ulti\n"+
                                               "(a)bout, (l)icense, (q)uit, (e)xit, (c)lear";
-        public static readonly string version = "0.2.2";
+        public static readonly string version = "0.3.0 - PreRelease 1";
         public static readonly string license = "All rights reserved. (C) 2020.\nMIT License";
         public static readonly string about = "             ^ Guessing Game ^             \n"+
                                               "       Developed by Stiles-X(github)       \n"+
@@ -50,8 +50,8 @@ namespace GuessingGame.UI
   / ____| github.com/Stiles-X         __/ |
  | |  __  __ _ _ __ ___   ___        |___/ 
  | | |_ |/ _` | '_ ` _ \ / _ \             
- | |__| | (_| | | | | | |  __/             
-  \_____|\__,_|_| |_| |_|\___|   " + $"{text}";
+ | |__| | (_| | | | | | |  __/   " + $"v0.3.0" + @"
+ \_____ |\__,_|_| |_| |_|\___| "+"PreRelease 1  ";
         }
         public static bool Exist(string[] pattern, string matcher, MainMenuCommand value, out MainMenuCommand valueOut)
         {
