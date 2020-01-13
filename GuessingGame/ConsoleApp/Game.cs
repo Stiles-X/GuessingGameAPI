@@ -19,7 +19,7 @@ namespace GuessingGame.UI
             try
             {
                 int answer = Misc.intput(
-                $"{api.GetLeftGuesses()} guesses left. Choose between (including) {api.GetMin()} and {api.GetMax()}: "
+                $"{api.GetLeftGuesses()} Gs left. Guess between {api.GetMax()} and {api.GetMin()}: "
                 );
                 Correct = api.Guess(answer);
             }
@@ -43,15 +43,16 @@ namespace GuessingGame.UI
                 bool Correct = GuessHarder(api);
                 if (Correct) 
                 { 
-                    Console.WriteLine("Congratulations, you did it! Incredible job!");
-                    Console.WriteLine($"From a game of {api.GetAllowedGuesses()} guesses, between {api.GetMax()} and {api.GetMin()}");
-                    Console.WriteLine($"You won with {api.GetUsedGuesses()} guesses or {api.GetLeftGuesses()} guesses left");
+                    Console.WriteLine("Congratulations, you did it! Incredible job!"
+                        +"\n"
+                        +$"From a game of {api.GetAllowedGuesses()} guesses, between {api.GetMax()} and {api.GetMin()},"
+                        +$"You won with {api.GetUsedGuesses()} guesses or {api.GetLeftGuesses()} guesses left");
                 }
                 else { Guess(api); }
             }
         }
 
-        public static void SetMin(API api)
+        private static void SetMin(API api)
         {
             try
             {
@@ -68,7 +69,7 @@ namespace GuessingGame.UI
                 SetMin(api);
             }
         }
-        public static void SetMax(API api)
+        private static void SetMax(API api)
         {
             try
             {
@@ -85,7 +86,7 @@ namespace GuessingGame.UI
                 SetMax(api);
             }
         }
-        public static void SetAllowedGuesses(API api)
+        private static void SetAllowedGuesses(API api)
         {
             try
             {
@@ -97,7 +98,7 @@ namespace GuessingGame.UI
             }
             
         }
-        public static void SetCorrect(API api)
+        private static void SetCorrect(API api)
         {
             try
             {
@@ -130,6 +131,7 @@ namespace GuessingGame.UI
                     api.SetCorrectRandom();
                 }
                 else if (playerMode == PlayerMode.multi) { SetCorrect(api); }
+                Misc.ClearAsciiLogoV();
                 Guess(api);
                 Console.ReadKey();
             } catch (Misc.QuitException) { }
