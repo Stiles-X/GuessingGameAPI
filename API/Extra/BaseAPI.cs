@@ -4,7 +4,7 @@ using System.Text;
 
 namespace API
 {
-    class BaseAPI : Interfaces.IAPI
+    public class BaseAPI : Interfaces.IAPI
     {
         private Interfaces.IModel Model { get; set; }
         public BaseAPI(Interfaces.IModel Model)

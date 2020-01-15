@@ -4,7 +4,7 @@ using System.Text;
 using API.Exceptions;
 namespace API
 {
-    class Model
+    public class Model : Interfaces.IModel
     {
         // Max
         private int? _Max { get; set; }

@@ -5,7 +5,7 @@ using API.Exceptions;
 
 namespace API
 {
-    class ModelWithoutRules : Interfaces.IModel
+    public class ModelWithoutRules : Interfaces.IModel
     {
         public int Max { get; set; }
         public int Min { get; set; }

@@ -6,7 +6,7 @@ using API.Extensions;
 
 namespace API
 {
-    class API : Interfaces.IAPI
+    public class API : Interfaces.IAPI
     {
         private Interfaces.IModel Model { get; set; }
         public API(Interfaces.IModel Model)

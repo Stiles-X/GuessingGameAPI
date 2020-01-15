@@ -3,9 +3,9 @@ using System;
 using System.Collections.Generic;
 using System.Text;
 
-namespace API.Extensions
+namespace API.Extensions.HelperFunctions
 {
-    public static class APIExtensions
+    public static class HelperFunctions
     {
         public static int GetRandom(this IAPI api)
         {
@@ -14,6 +14,10 @@ namespace API.Extensions
         public static void SetCorrectRandom(this IAPI api)
         {
             api.SetCorrect(api.GetRandom());
+        }
+        public static int GetLeftGuesses(this IAPI api)
+        {
+            return api.GetAllowedGuesses() - api.GetUsedGuesses();
         }
     }
 }
