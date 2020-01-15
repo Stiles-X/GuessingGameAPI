@@ -8,20 +8,20 @@ namespace APIProject.Interfaces
     {
         //Max
         int GetMax();
-        void SetMax(int Max);
+        void SetMax(int max);
         //Min
         int GetMin();
-        void SetMin(int Min);
+        void SetMin(int min);
         //Correct
         int GetCorrect();
-        void SetCorrect(int Correct);
+        void SetCorrect(int correct);
         //Guess
-        bool Guess(int Guess);
+        bool Guess(int guess);
         //AllowedGuesses
         int GetAllowedGuesses();
-        void SetAllowedGuesses(int AllowedGuesses);
+        void SetAllowedGuesses(int allowedGuesses);
         //UsedGuesses
         int GetUsedGuesses();
-        void SetUsedGuesses(int UsedGuesses);
+        void SetUsedGuesses(int usedGuesses);
     }
 }
