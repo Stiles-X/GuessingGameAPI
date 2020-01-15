@@ -80,23 +80,6 @@ namespace API
             }
         }
 
-        // Guess (the method acting)
-        public bool Guess(int guess)
-        {
-            if ((guess > Max) | (guess < Min))
-            {
-                throw new ArgumentOutOfRangeException("guess", "Your guess was outside of max and min range");
-            }
-
-            if (UsedGuesses >= AllowedGuesses)
-            {
-                throw new OutOfTriesException("You are out of guesses");
-            }
-
-            UsedGuesses += 1;
-            return (guess == Correct);
-        }
-
         // Allowed Guesses
         private int? _AllowedGuesses { get; set; }
         public int AllowedGuesses

@@ -5,20 +5,21 @@ using System.Text;
 
 namespace API
 {
-    class APIWithHelperFunctions : API, IAPIWithHelperFunctions
+    class APIWithHelperFunctions : API
     {
         public APIWithHelperFunctions(IModel Model) : base(Model)
         {
         }
-
-        public int GetRandom()
+    }
+    public static class APIExtensions
+    {
+        public static int GetRandom(this IAPI api)
         {
-            return new Random().Next(GetMin(), GetMax() + 1);
+            return new Random().Next(api.GetMin(), api.GetMax() + 1);
         }
-
-        public void SetCorrectRandom()
+        public static void SetCorrectRandom(this IAPI api)
         {
-            SetCorrect(GetRandom());
+            api.SetCorrect(api.GetRandom());
         }
     }
 }

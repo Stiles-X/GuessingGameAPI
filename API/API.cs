@@ -14,57 +14,57 @@ namespace API
 
         public int GetMax()
         {
-            throw new NotImplementedException();
+            return Model.Max;
         }
 
-        public void SetMax(int MaxV)
+        public void SetMax(int Max)
         {
-            throw new NotImplementedException();
+            Model.Max = Max;
         }
 
         public int GetMin()
         {
-            throw new NotImplementedException();
+            return Model.Min;
         }
 
         public void SetMin(int Min)
         {
-            throw new NotImplementedException();
+            Model.Min = Min;
         }
 
         public int GetCorrect()
         {
-            throw new NotImplementedException();
+            return Model.Correct;
         }
 
         public void SetCorrect(int Correct)
         {
-            throw new NotImplementedException();
+            SetCorrect(Correct);
         }
 
         public bool Guess(int Guess)
         {
-            throw new NotImplementedException();
+            return (Guess == GetCorrect());
         }
 
         public int GetAllowedGuesses()
         {
-            throw new NotImplementedException();
+            return Model.AllowedGuesses;
         }
 
         public void SetAllowedGuesses(int AllowedGuesses)
         {
-            throw new NotImplementedException();
+            Model.AllowedGuesses = AllowedGuesses;
         }
 
         public int GetUsedGuesses()
         {
-            throw new NotImplementedException();
+            return Model.UsedGuesses;
         }
 
         public void SetUsedGuesses(int UsedGuesses)
         {
-            throw new NotImplementedException();
+            Model.UsedGuesses = UsedGuesses;
         }
     }
 }

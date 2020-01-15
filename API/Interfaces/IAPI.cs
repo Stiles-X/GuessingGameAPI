@@ -4,11 +4,11 @@ using System.Text;
 
 namespace API.Interfaces
 {
-    interface IAPI
+    public interface IAPI
     {
         //Max
         int GetMax();
-        void SetMax(int MaxV);
+        void SetMax(int Max);
         //Min
         int GetMin();
         void SetMin(int Min);
