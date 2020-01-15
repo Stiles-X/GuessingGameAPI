@@ -2,12 +2,12 @@
 using System.Collections.Generic;
 using System.Text;
 
-namespace API
+namespace APIProject.Extra
 {
-    class BaseAPI : Interfaces.IAPI
+    public class DefaultAPI : Interfaces.IAPI
     {
         private Interfaces.IModel Model { get; set; }
-        public BaseAPI(Interfaces.IModel Model)
+        public DefaultAPI(Interfaces.IModel Model)
         {
             this.Model = Model;
         }

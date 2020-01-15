@@ -1,7 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Text;
-namespace API.Exceptions
+namespace APIProject.Exceptions
 {
     public class ForbiddenException : InvalidOperationException
     {

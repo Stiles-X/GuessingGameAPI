@@ -4,9 +4,11 @@ namespace ConsoleUI
 {
     class Program
     {
-        static void Main(string[] args)
+        static void Main()//string[] args)
         {
-            Console.WriteLine("Hello World!");
+            Game game = new Game();
+            game.PlaySinglePlayer();
+            Console.Read();
         }
     }
 }

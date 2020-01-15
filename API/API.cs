@@ -1,12 +1,10 @@
-﻿using API.Interfaces;
-using System;
+﻿using System;
 using System.Collections.Generic;
 using System.Text;
-using API.Extensions;
 
-namespace API
+namespace APIProject
 {
-    class API : Interfaces.IAPI
+    public class API : Interfaces.IAPI
     {
         private Interfaces.IModel Model { get; set; }
         public API(Interfaces.IModel Model)
@@ -41,7 +39,7 @@ namespace API
 
         public void SetCorrect(int Correct)
         {
-            SetCorrect(Correct);
+            Model.Correct = Correct;
         }
 
         // Guess

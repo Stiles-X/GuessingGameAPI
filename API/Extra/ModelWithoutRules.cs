@@ -1,11 +1,11 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Text;
-using API.Exceptions;
+using APIProject.Exceptions;
 
-namespace API
+namespace APIProject.Extra
 {
-    class ModelWithoutRules : Interfaces.IModel
+    public class ModelWithoutRules : Interfaces.IModel
     {
         public int Max { get; set; }
         public int Min { get; set; }
