@@ -27,11 +27,16 @@ namespace ConsoleUI
             GameAsk.AskMin(API);
             if (IsSingle)
             {
-                GameAsk.AskCorrect(API);
+                string[] objects = new string[]
+                { "The magic mirror", "Donald Trump", "Your mom", "Area 51", "Ricardo", "Pewdiepie",
+                "The cosmic background radiation", "Batman", "Peanut Butter"};
+                string person = (string)objects.GetValue(new Random().Next(objects.Length));
+                Console.WriteLine($"{person} is setting the correct answer");
+                API.SetCorrectRandom();
             }
             else
             {
-                API.SetCorrectRandom();
+                GameAsk.AskCorrect(API);
             }
             GameAsk.AskAllowedGuesses(API);
         }
@@ -46,15 +51,15 @@ namespace ConsoleUI
             } while (!API.IsOutOfGuesses());
             return false;
         }
-        private void Inform(bool IsGameWon)
+        private void Inform(bool isGuessCorrect)
         {
-            if (IsGameWon)
+            if (isGuessCorrect)
             {
                 Console.WriteLine("Congratulations, you guessed correctly");
             }
             else
             {
-                Console.WriteLine("Sorry, better luck next time");
+                Console.WriteLine($"Sorry, better luck next time. The correct answer is {API.GetCorrect()}");
             }
         }
         private void StoreNewAPI()

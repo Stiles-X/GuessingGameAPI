@@ -10,5 +10,9 @@ v0.3.0 Pre
 - Many small improvements, updated 'about' info
 - Added README file which includes License, Documentation(unfinished and outdated), and about info.
 
-v0.3.0 Final - TODO
+v1.0.0 Pre
+- Refactored code for cleaner code
+- Simplified UI
+
+v1.0.0 Final - TODO
 - Finish Documentation

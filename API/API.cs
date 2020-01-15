@@ -7,9 +7,9 @@ namespace APIProject
     public class API : Interfaces.IAPI
     {
         private Interfaces.IModel Model { get; set; }
-        public API(Interfaces.IModel Model)
+        public API(Interfaces.IModel model)
         {
-            this.Model = Model;
+            this.Model = model;
         }
 
         public int GetMax()
@@ -17,9 +17,9 @@ namespace APIProject
             return Model.Max;
         }
 
-        public void SetMax(int Max)
+        public void SetMax(int max)
         {
-            Model.Max = Max;
+            Model.Max = max;
         }
 
         public int GetMin()
@@ -27,9 +27,9 @@ namespace APIProject
             return Model.Min;
         }
 
-        public void SetMin(int Min)
+        public void SetMin(int min)
         {
-            Model.Min = Min;
+            Model.Min = min;
         }
 
         public int GetCorrect()
@@ -37,29 +37,29 @@ namespace APIProject
             return Model.Correct;
         }
 
-        public void SetCorrect(int Correct)
+        public void SetCorrect(int correct)
         {
-            Model.Correct = Correct;
+            Model.Correct = correct;
         }
 
         // Guess
-        public bool Guess(int Guess)
+        public bool Guess(int guess)
         {
-            if (Guess > GetMax())
+            if (guess > GetMax())
             {
                 throw new ArgumentOutOfRangeException("guess", "Your guess is more than Max");
             }
-            else if (Guess < GetMin())
+            else if (guess < GetMin())
             {
                 throw new ArgumentOutOfRangeException("guess", "Your guess is less than Min");
             }
 
             if (GetUsedGuesses() >= GetAllowedGuesses())
             {
-                throw new Exceptions.OutOfTriesException("You are out of guesses");
+                throw new InvalidOperationException("You are out of guesses");
             }
             SetUsedGuesses(GetUsedGuesses() + 1);
-            return (Guess == GetCorrect());
+            return (guess == GetCorrect());
         }
 
         public int GetAllowedGuesses()
@@ -67,9 +67,9 @@ namespace APIProject
             return Model.AllowedGuesses;
         }
 
-        public void SetAllowedGuesses(int AllowedGuesses)
+        public void SetAllowedGuesses(int allowedGuesses)
         {
-            Model.AllowedGuesses = AllowedGuesses;
+            Model.AllowedGuesses = allowedGuesses;
         }
 
         public int GetUsedGuesses()
@@ -77,9 +77,9 @@ namespace APIProject
             return Model.UsedGuesses;
         }
 
-        public void SetUsedGuesses(int UsedGuesses)
+        public void SetUsedGuesses(int usedGuesses)
         {
-            Model.UsedGuesses = UsedGuesses;
+            Model.UsedGuesses = usedGuesses;
         }
 
     }

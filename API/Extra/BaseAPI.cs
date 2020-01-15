@@ -4,12 +4,12 @@ using System.Text;
 
 namespace APIProject.Extra
 {
-    public class DefaultAPI : Interfaces.IAPI
+    public class BaseAPI : Interfaces.IAPI
     {
         private Interfaces.IModel Model { get; set; }
-        public DefaultAPI(Interfaces.IModel Model)
+        public BaseAPI(Interfaces.IModel model)
         {
-            this.Model = Model;
+            this.Model = model;
         }
 
         public int GetMax()
@@ -17,9 +17,9 @@ namespace APIProject.Extra
             return Model.Max;
         }
 
-        public void SetMax(int Max)
+        public void SetMax(int max)
         {
-            Model.Max = Max;
+            Model.Max = max;
         }
 
         public int GetMin()
@@ -27,9 +27,9 @@ namespace APIProject.Extra
             return Model.Min;
         }
 
-        public void SetMin(int Min)
+        public void SetMin(int min)
         {
-            Model.Min = Min;
+            Model.Min = min;
         }
 
         public int GetCorrect()
@@ -37,15 +37,15 @@ namespace APIProject.Extra
             return Model.Correct;
         }
 
-        public void SetCorrect(int Correct)
+        public void SetCorrect(int correct)
         {
-            SetCorrect(Correct);
+            SetCorrect(correct);
         }
 
-        public bool Guess(int Guess)
+        public bool Guess(int guess)
         {
             SetUsedGuesses(GetUsedGuesses() + 1);
-            return (Guess == GetCorrect());
+            return (guess == GetCorrect());
         }
 
         public int GetAllowedGuesses()
@@ -53,9 +53,9 @@ namespace APIProject.Extra
             return Model.AllowedGuesses;
         }
 
-        public void SetAllowedGuesses(int AllowedGuesses)
+        public void SetAllowedGuesses(int allowedGuesses)
         {
-            Model.AllowedGuesses = AllowedGuesses;
+            Model.AllowedGuesses = allowedGuesses;
         }
 
         public int GetUsedGuesses()
@@ -63,9 +63,9 @@ namespace APIProject.Extra
             return Model.UsedGuesses;
         }
 
-        public void SetUsedGuesses(int UsedGuesses)
+        public void SetUsedGuesses(int usedGuesses)
         {
-            Model.UsedGuesses = UsedGuesses;
+            Model.UsedGuesses = usedGuesses;
         }
     }
 }
