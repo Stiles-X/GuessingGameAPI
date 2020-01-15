@@ -1,8 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Text;
-
-namespace APIProject.Interfaces
+﻿namespace APIProject.Interfaces
 {
     public interface IAPI
     {

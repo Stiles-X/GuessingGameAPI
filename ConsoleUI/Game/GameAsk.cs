@@ -1,9 +1,6 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Text;
 using APIProject.Exceptions;
 using APIProject.Interfaces;
-using APIProject.Extensions.OutOfGuesses;
 using APIProject.Extensions.HelperFunctions;
 
 namespace ConsoleUI.GameHelper
@@ -33,10 +30,6 @@ namespace ConsoleUI.GameHelper
                         break;
                     }
                 }
-                catch (ForbiddenException)
-                {
-                    Console.WriteLine("You have already set Max, and LockMode is 'on'");
-                }
                 catch (ArgumentOutOfRangeException)
                 {
                     Console.WriteLine("Max value must be more than Min or Correct");
@@ -56,10 +49,6 @@ namespace ConsoleUI.GameHelper
                         api.SetMin(min);
                         break;
                     }
-                }
-                catch (ForbiddenException)
-                {
-                    Console.WriteLine("You have already set Min, and LockMode is 'on'");
                 }
                 catch (ArgumentOutOfRangeException)
                 {
