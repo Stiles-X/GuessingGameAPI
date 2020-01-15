@@ -12,7 +12,7 @@ namespace APIProject
         {
             get
             {
-                if (!(_Max.HasValue))
+                if (!_Max.HasValue)
                 {
                     throw new PropertyNotSetException("Max", "Max value has not been set");
                 }
@@ -20,14 +20,14 @@ namespace APIProject
             }
             set
             {
-                if (!_Min.HasValue)
+                if (_Min.HasValue)
                 {
                     if (value < Min) // Check if the number we are trying to set as max
                     {
                         throw new ArgumentOutOfRangeException("Max", "Max cannot be less than Min"); // is less than min
                     }
                 }
-                if (!_Correct.HasValue)
+                if (_Correct.HasValue)
                 {
                     if (value < Correct)
                     {
@@ -44,7 +44,7 @@ namespace APIProject
         {
             get
             {
-                if (!(_Min.HasValue))
+                if (!_Min.HasValue)
                 {
                     throw new PropertyNotSetException("Min", "Min value has not been set");
                 }
@@ -52,14 +52,14 @@ namespace APIProject
             }
             set
             {
-                if (!_Max.HasValue)
+                if (_Max.HasValue)
                 {
                     if (value > Max) // Check if the number we are trying to set as min
                     {
                         throw new ArgumentOutOfRangeException("Min", "Min cannot be more than Max"); // is less than max
                     }
                 }
-                if (!_Correct.HasValue)
+                if (_Correct.HasValue)
                 {
                     if (value > Correct)
                     {

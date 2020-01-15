@@ -39,7 +39,7 @@ namespace APIProject
 
         public void SetCorrect(int Correct)
         {
-            SetCorrect(Correct);
+            Model.Correct = Correct;
         }
 
         // Guess
