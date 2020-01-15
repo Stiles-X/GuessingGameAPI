@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Text;
 using APIProject;
 using APIProject.Extensions.HelperFunctions;
+using APIProject.Extensions.OutOfGuesses;
 using APIProject.Interfaces;
 using ConsoleUI.GameHelper;
 
@@ -36,13 +37,20 @@ namespace ConsoleUI
         }
         private bool Guess()
         {
+            do
+            {
+                if (GameAsk.Guess(API))
+                {
+                    return true;
+                }
+            } while (!API.IsOutOfGuesses());
             return false;
         }
         private void Inform(bool IsGameWon)
         {
             if (IsGameWon)
             {
-                Console.WriteLine("Congratulations");
+                Console.WriteLine("Congratulations, you guessed correctly");
             }
             else
             {

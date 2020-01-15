@@ -12,11 +12,11 @@ namespace APIProject.Extensions.OutOfGuesses
             int LeftGuesses = api.GetAllowedGuesses() - api.GetUsedGuesses();
             if (LeftGuesses > 0)
             {
-                return true;
+                return false;
             }
             else if (LeftGuesses == 0)
             {
-                return false;
+                return true;
             }
             throw new InvalidOperationException("LeftGuesses should not be less than 0");
         }

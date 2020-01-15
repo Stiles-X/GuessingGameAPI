@@ -3,6 +3,8 @@ using System.Collections.Generic;
 using System.Text;
 using APIProject.Exceptions;
 using APIProject.Interfaces;
+using APIProject.Extensions.OutOfGuesses;
+using APIProject.Extensions.HelperFunctions;
 
 namespace ConsoleUI.GameHelper
 {
@@ -10,20 +12,16 @@ namespace ConsoleUI.GameHelper
     {
         private static bool TryAskInt(out int value)
         {
-            bool done = int.TryParse(Console.ReadLine(), out value);
-            if (!done)
+            bool canParse = int.TryParse(Console.ReadLine(), out value);
+            if (!canParse)
             {
                 Console.WriteLine("Enter a valid character");
             }
-            return done;
+            return canParse;
         }
-        private static bool TryAskInt()
-        {
-            return TryAskInt(out _);
-        }
+        //Max
         public static void AskMax(IAPI API)
         {
-            bool done = false;
             do
             {
                 Console.Write("Enter Max Number: ");
@@ -32,7 +30,7 @@ namespace ConsoleUI.GameHelper
                     if (TryAskInt(out int max))
                     {
                         API.SetMax(max);
-                        done = true;
+                        break;
                     }
                 }
                 catch (ForbiddenException)
@@ -41,13 +39,13 @@ namespace ConsoleUI.GameHelper
                 }
                 catch (ArgumentOutOfRangeException)
                 {
-                    Console.WriteLine("Your attempted Max value is less than selected Min, or 'Correct'");
+                    Console.WriteLine("Max value must be more than Min or Correct");
                 }
-            } while (!done);
+            } while (true);
         }
+        //Min
         public static void AskMin(IAPI API)
         {
-            bool done = false;
             do
             {
                 Console.Write("Enter Min Number: ");
@@ -56,22 +54,22 @@ namespace ConsoleUI.GameHelper
                     if (TryAskInt(out int min))
                     {
                         API.SetMin(min);
-                        done = true;
+                        break;
                     }
                 }
                 catch (ForbiddenException)
                 {
-                    Console.WriteLine("You have already set min, and LockMode is 'on'");
+                    Console.WriteLine("You have already set Min, and LockMode is 'on'");
                 }
                 catch (ArgumentOutOfRangeException)
                 {
-                    Console.WriteLine("You attempted min value is more than selected Max, or 'Correct'");
+                    Console.WriteLine("Min value must be less than Max or Correct");
                 }
-            } while (!done);
+            } while (true);
         }
+        //Correct
         public static void AskCorrect(IAPI API)
         {
-            bool done = false;
             do
             {
                 Console.Write("Enter 'Correct' Number: ");
@@ -80,7 +78,7 @@ namespace ConsoleUI.GameHelper
                     if (TryAskInt(out int correct))
                     {
                         API.SetCorrect(correct);
-                        done = true;
+                        break;
                     }
                 }
                 catch (PropertyNotSetException)
@@ -89,13 +87,13 @@ namespace ConsoleUI.GameHelper
                 }
                 catch (ArgumentOutOfRangeException)
                 {
-                    Console.WriteLine("Value must be max >= value >= min");
+                    Console.WriteLine("Value must be less than max and more than min");
                 }
-            } while (!done);
+            } while (true);
         }
+        //AllowedGuesses
         public static void AskAllowedGuesses(IAPI API)
         {
-            bool done = false;
             do
             {
                 Console.Write("Enter Number of Guesses: ");
@@ -103,15 +101,41 @@ namespace ConsoleUI.GameHelper
                 {
                     if (TryAskInt(out int allowedGuesses))
                     {
-                        API.SetMin(allowedGuesses);
-                        done = true;
+                        API.SetAllowedGuesses(allowedGuesses);
+                        break;
                     }
                 }
                 catch (ArgumentOutOfRangeException)
                 {
                     Console.WriteLine("Number of guesses can only be whole numbers");
                 }
-            } while (!done);
+            } while (true);
+        }
+        //Guess
+        public static bool Guess(IAPI API)
+        {
+            bool isGameWon;
+            do
+            {
+                Console.Write($"{API.GetLeftGuesses()} Gs left. Guess between {API.GetMax()} and {API.GetMin()}: ");
+                try
+                {
+                    if (TryAskInt(out int guess))
+                    {
+                        isGameWon = API.Guess(guess);
+                        break;
+                    }
+                }
+                catch (PropertyNotSetException)
+                {
+                    Console.WriteLine("'Correct' or 'Allowed Guesses' has not been set");
+                }
+                catch (ArgumentOutOfRangeException)
+                {
+                    Console.WriteLine("Your guess was outside of Max and Min range");
+                }
+            } while (true);
+            return isGameWon;
         }
     }
 }
