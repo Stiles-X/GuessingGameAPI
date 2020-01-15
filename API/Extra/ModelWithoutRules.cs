@@ -1,9 +1,9 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Text;
-using API.Exceptions;
+using APIProject.Exceptions;
 
-namespace API
+namespace APIProject.Extra
 {
     public class ModelWithoutRules : Interfaces.IModel
     {

@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using System.Text;
 
-namespace API.Interfaces
+namespace APIProject.Interfaces
 {
     public interface IModel
     {

@@ -1,5 +1,5 @@
 ﻿using System;
-namespace API.Exceptions
+namespace APIProject.Exceptions
 {
     public class PropertyNotSetException : InvalidOperationException
     {

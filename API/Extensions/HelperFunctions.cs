@@ -1,9 +1,9 @@
-﻿using API.Interfaces;
+﻿using APIProject.Interfaces;
 using System;
 using System.Collections.Generic;
 using System.Text;
 
-namespace API.Extensions.HelperFunctions
+namespace APIProject.Extensions.HelperFunctions
 {
     public static class HelperFunctions
     {

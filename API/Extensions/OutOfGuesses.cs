@@ -1,9 +1,9 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Text;
-using API.Interfaces;
+using APIProject.Interfaces;
 
-namespace API.Extensions.OutOfGuesses
+namespace APIProject.Extensions.OutOfGuesses
 {
     public static class OutOfGuessesExtension
     {

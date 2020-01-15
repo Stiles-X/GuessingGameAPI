@@ -1,8 +1,8 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Text;
-using API.Exceptions;
-namespace API
+using APIProject.Exceptions;
+namespace APIProject
 {
     public class Model : Interfaces.IModel
     {

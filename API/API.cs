@@ -1,10 +1,8 @@
-﻿using API.Interfaces;
-using System;
+﻿using System;
 using System.Collections.Generic;
 using System.Text;
-using API.Extensions;
 
-namespace API
+namespace APIProject
 {
     public class API : Interfaces.IAPI
     {
