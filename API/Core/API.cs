@@ -4,44 +4,15 @@ using System.Text;
 
 namespace API
 {
-    class API : Interfaces.APIInterface
+    class API : Interfaces.IAPI
     {
-        public void GetAllowedGuesses()
+        private Interfaces.IModel Model { get; set; }
+        public API(Interfaces.IModel Model)
         {
-            throw new NotImplementedException();
+            this.Model = Model;
         }
 
-        public void GetCorrect()
-        {
-            throw new NotImplementedException();
-        }
-
-        public void GetMax()
-        {
-            throw new NotImplementedException();
-        }
-
-        public void GetMin()
-        {
-            throw new NotImplementedException();
-        }
-
-        public void GetUsedGuesses()
-        {
-            throw new NotImplementedException();
-        }
-
-        public bool Guess()
-        {
-            throw new NotImplementedException();
-        }
-
-        public void SetAllowedGuesses(int AllowedGuesses)
-        {
-            throw new NotImplementedException();
-        }
-
-        public void SetCorrect(int Correct)
+        public int GetMax()
         {
             throw new NotImplementedException();
         }
@@ -51,7 +22,42 @@ namespace API
             throw new NotImplementedException();
         }
 
+        public int GetMin()
+        {
+            throw new NotImplementedException();
+        }
+
         public void SetMin(int Min)
+        {
+            throw new NotImplementedException();
+        }
+
+        public int GetCorrect()
+        {
+            throw new NotImplementedException();
+        }
+
+        public void SetCorrect(int Correct)
+        {
+            throw new NotImplementedException();
+        }
+
+        public bool Guess(int Guess)
+        {
+            throw new NotImplementedException();
+        }
+
+        public int GetAllowedGuesses()
+        {
+            throw new NotImplementedException();
+        }
+
+        public void SetAllowedGuesses(int AllowedGuesses)
+        {
+            throw new NotImplementedException();
+        }
+
+        public int GetUsedGuesses()
         {
             throw new NotImplementedException();
         }

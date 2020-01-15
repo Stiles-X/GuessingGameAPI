@@ -4,7 +4,9 @@ using System.Text;
 
 namespace API.Interfaces
 {
-    interface LogicInterface
+    interface IAPIWithHelperFunctions : IAPI
     {
+        int GetRandom();
+        void SetCorrectRandom();
     }
 }

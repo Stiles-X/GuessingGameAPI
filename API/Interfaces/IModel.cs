@@ -4,7 +4,7 @@ using System.Text;
 
 namespace API.Interfaces
 {
-    interface ModelInterface
+    interface IModel
     {
         int Max { get; set; }
         int Min { get; set; }

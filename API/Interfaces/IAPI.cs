@@ -4,24 +4,24 @@ using System.Text;
 
 namespace API.Interfaces
 {
-    interface APIInterface
+    interface IAPI
     {
         //Max
-        void GetMax();
+        int GetMax();
         void SetMax(int MaxV);
         //Min
-        void GetMin();
+        int GetMin();
         void SetMin(int Min);
         //Correct
-        void GetCorrect();
+        int GetCorrect();
         void SetCorrect(int Correct);
         //Guess
-        bool Guess();
+        bool Guess(int Guess);
         //AllowedGuesses
-        void GetAllowedGuesses();
+        int GetAllowedGuesses();
         void SetAllowedGuesses(int AllowedGuesses);
         //UsedGuesses
-        void GetUsedGuesses();
+        int GetUsedGuesses();
         void SetUsedGuesses(int UsedGuesses);
     }
 }
