@@ -2,26 +2,26 @@
 using System.Collections.Generic;
 using System.Text;
 
-namespace API
+namespace API.Interfaces
 {
-    interface APIInterface
+    public interface IAPI
     {
         //Max
-        void GetMax();
-        void SetMax(int MaxV);
+        int GetMax();
+        void SetMax(int Max);
         //Min
-        void GetMin();
+        int GetMin();
         void SetMin(int Min);
         //Correct
-        void GetCorrect();
+        int GetCorrect();
         void SetCorrect(int Correct);
         //Guess
-        bool Guess();
+        bool Guess(int Guess);
         //AllowedGuesses
-        void GetAllowedGuesses();
+        int GetAllowedGuesses();
         void SetAllowedGuesses(int AllowedGuesses);
         //UsedGuesses
-        void GetUsedGuesses();
+        int GetUsedGuesses();
         void SetUsedGuesses(int UsedGuesses);
     }
 }

@@ -1,15 +1,13 @@
-﻿using API.Interfaces;
-using System;
+﻿using System;
 using System.Collections.Generic;
 using System.Text;
-using API.Extensions;
 
 namespace API
 {
-    class API : Interfaces.IAPI
+    class BaseAPI : Interfaces.IAPI
     {
         private Interfaces.IModel Model { get; set; }
-        public API(Interfaces.IModel Model)
+        public BaseAPI(Interfaces.IModel Model)
         {
             this.Model = Model;
         }
@@ -44,22 +42,8 @@ namespace API
             SetCorrect(Correct);
         }
 
-        // Guess
         public bool Guess(int Guess)
         {
-            if (Guess > GetMax())
-            {
-                throw new ArgumentOutOfRangeException("guess", "Your guess is more than Max");
-            }
-            else if (Guess < GetMin())
-            {
-                throw new ArgumentOutOfRangeException("guess", "Your guess is less than Min");
-            }
-
-            if (GetUsedGuesses() >= GetAllowedGuesses())
-            {
-                throw new Exceptions.OutOfTriesException("You are out of guesses");
-            }
             SetUsedGuesses(GetUsedGuesses() + 1);
             return (Guess == GetCorrect());
         }
@@ -83,6 +67,5 @@ namespace API
         {
             Model.UsedGuesses = UsedGuesses;
         }
-
     }
 }
