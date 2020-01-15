@@ -1,0 +1,14 @@
+META
+Changelog Version: v0.3.0 PreRelease 1
+
+v0.3.0 Pre
+- Refactored code for cleaner code
+- Moved helper 'function' properties from GameCore to API as functions.
+- Added feature! There is now an dynamic interactive options to choose after finishing a game.
+- - Such as - tell the answer, one more guess, play again (same answer), play new single, play new multi,
+- - clear the screen, help screen (default), and quit!
+- Many small improvements, updated 'about' info
+- Added README file which includes License, Documentation(unfinished and outdated), and about info.
+
+v0.3.0 Final - TODO
+- Finish Documentation
