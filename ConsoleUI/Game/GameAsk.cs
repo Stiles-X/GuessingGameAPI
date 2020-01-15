@@ -20,7 +20,7 @@ namespace ConsoleUI.GameHelper
             return canParse;
         }
         //Max
-        public static void AskMax(IAPI API)
+        public static void AskMax(IAPI api)
         {
             do
             {
@@ -29,7 +29,7 @@ namespace ConsoleUI.GameHelper
                 {
                     if (TryAskInt(out int max))
                     {
-                        API.SetMax(max);
+                        api.SetMax(max);
                         break;
                     }
                 }
@@ -44,7 +44,7 @@ namespace ConsoleUI.GameHelper
             } while (true);
         }
         //Min
-        public static void AskMin(IAPI API)
+        public static void AskMin(IAPI api)
         {
             do
             {
@@ -53,7 +53,7 @@ namespace ConsoleUI.GameHelper
                 {
                     if (TryAskInt(out int min))
                     {
-                        API.SetMin(min);
+                        api.SetMin(min);
                         break;
                     }
                 }
@@ -68,7 +68,7 @@ namespace ConsoleUI.GameHelper
             } while (true);
         }
         //Correct
-        public static void AskCorrect(IAPI API)
+        public static void AskCorrect(IAPI api)
         {
             do
             {
@@ -77,7 +77,7 @@ namespace ConsoleUI.GameHelper
                 {
                     if (TryAskInt(out int correct))
                     {
-                        API.SetCorrect(correct);
+                        api.SetCorrect(correct);
                         break;
                     }
                 }
@@ -92,7 +92,7 @@ namespace ConsoleUI.GameHelper
             } while (true);
         }
         //AllowedGuesses
-        public static void AskAllowedGuesses(IAPI API)
+        public static void AskAllowedGuesses(IAPI api)
         {
             do
             {
@@ -101,7 +101,7 @@ namespace ConsoleUI.GameHelper
                 {
                     if (TryAskInt(out int allowedGuesses))
                     {
-                        API.SetAllowedGuesses(allowedGuesses);
+                        api.SetAllowedGuesses(allowedGuesses);
                         break;
                     }
                 }
@@ -112,17 +112,19 @@ namespace ConsoleUI.GameHelper
             } while (true);
         }
         //Guess
-        public static bool Guess(IAPI API)
+        public static bool Guess(IAPI api)
         {
-            bool isGameWon;
             do
             {
-                Console.Write($"{API.GetLeftGuesses()} Gs left. Guess between {API.GetMax()} and {API.GetMin()}: ");
+                Console.Write($"{api.GetLeftGuesses()} Gs left. Guess between {api.GetMax()} and {api.GetMin()}: ");
                 try
                 {
                     if (TryAskInt(out int guess))
                     {
-                        isGameWon = API.Guess(guess);
+                        if (api.Guess(guess))
+                        {
+                            return true;
+                        }
                         break;
                     }
                 }
@@ -135,7 +137,7 @@ namespace ConsoleUI.GameHelper
                     Console.WriteLine("Your guess was outside of Max and Min range");
                 }
             } while (true);
-            return isGameWon;
+            return false;
         }
     }
 }

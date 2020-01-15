@@ -9,12 +9,12 @@ namespace APIProject.Extensions.OutOfGuesses
     {
         public static bool IsOutOfGuesses(this IAPI api)
         {
-            int LeftGuesses = api.GetAllowedGuesses() - api.GetUsedGuesses();
-            if (LeftGuesses > 0)
+            int leftGuesses = api.GetAllowedGuesses() - api.GetUsedGuesses();
+            if (leftGuesses > 0)
             {
                 return false;
             }
-            else if (LeftGuesses == 0)
+            else if (leftGuesses == 0)
             {
                 return true;
             }
