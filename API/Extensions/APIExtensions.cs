@@ -3,14 +3,8 @@ using System;
 using System.Collections.Generic;
 using System.Text;
 
-namespace API
+namespace API.Extensions
 {
-    class APIWithHelperFunctions : API
-    {
-        public APIWithHelperFunctions(IModel Model) : base(Model)
-        {
-        }
-    }
     public static class APIExtensions
     {
         public static int GetRandom(this IAPI api)
