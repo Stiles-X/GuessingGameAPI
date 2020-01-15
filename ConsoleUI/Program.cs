@@ -12,7 +12,7 @@ namespace ConsoleUI
         }
         static bool Menu()
         {
-            Console.WriteLine($"GuessingGameAPI - {APIProject.Info.version}");
+            Console.WriteLine($"GuessingGameAPI - v{APIProject.Info.version}");
             Console.WriteLine("(s)ingle-player or (m)ul(t)iplayer or (q)uit");
             string command = Console.ReadLine().ToLower();
             Console.Clear();

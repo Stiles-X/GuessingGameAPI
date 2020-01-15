@@ -56,7 +56,7 @@ namespace APIProject
 
             if (GetUsedGuesses() >= GetAllowedGuesses())
             {
-                throw new Exceptions.OutOfTriesException("You are out of guesses");
+                throw new InvalidOperationException("You are out of guesses");
             }
             SetUsedGuesses(GetUsedGuesses() + 1);
             return (guess == GetCorrect());
