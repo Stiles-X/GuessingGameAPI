@@ -4,7 +4,7 @@ using System.Text;
 
 namespace API
 {
-    class API : APIInterface
+    class API : Interfaces.APIInterface
     {
         public void GetAllowedGuesses()
         {
