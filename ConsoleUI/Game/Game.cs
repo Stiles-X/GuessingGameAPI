@@ -1,6 +1,4 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Text;
 using APIProject;
 using APIProject.Extensions.HelperFunctions;
 using APIProject.Extensions.OutOfGuesses;

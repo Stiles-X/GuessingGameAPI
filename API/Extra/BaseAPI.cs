@@ -1,8 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Text;
-
-namespace APIProject.Extra
+﻿namespace APIProject.Extra
 {
     public class BaseAPI : Interfaces.IAPI
     {
