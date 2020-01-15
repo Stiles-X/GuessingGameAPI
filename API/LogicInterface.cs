@@ -4,7 +4,7 @@ using System.Text;
 
 namespace API
 {
-    class Model : ModelInterface
+    interface LogicInterface
     {
     }
 }
