@@ -11,5 +11,9 @@ namespace APIProject.Exceptions
         public virtual string ParamName { get; }
         public static string GetMsg(string message, string paramName)
             => message + ", Param: " + paramName;
+
+        public PropertyNotSetException(string message, Exception innerException) : base(message, innerException)
+        {
+        }
     }
 }

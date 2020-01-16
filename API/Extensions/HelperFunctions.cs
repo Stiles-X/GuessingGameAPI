@@ -4,7 +4,7 @@ using System.Diagnostics.Contracts;
 
 namespace APIProject.Extensions.HelperFunctions
 {
-    public static class HelperFunctions
+    public static class HelperFunction
     {
         public static int GetRandom(this IAPI api)
         {
