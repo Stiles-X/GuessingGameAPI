@@ -4,6 +4,7 @@ namespace APIProject
 {
     public class Model : Interfaces.IModel
     {
+        #pragma warning disable CA1303 // Do not pass literals as localized parameters
         // Max
         private int? _Max { get; set; }
         public int Max
@@ -84,7 +85,7 @@ namespace APIProject
             {
                 if ((value > Max) | (value < Min)) // Check if value is out of range
                 {
-                    throw new ArgumentOutOfRangeException("value", "Correct can not be outside of max and min range"); // value out of range
+                    throw new ArgumentOutOfRangeException(nameof(value), "Correct can not be outside of max and min range"); // value out of range
                 }
                 _Correct = value; // Then set
             }

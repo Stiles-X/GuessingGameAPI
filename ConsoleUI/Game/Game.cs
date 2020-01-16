@@ -1,5 +1,4 @@
 ﻿using System;
-using APIProject;
 using APIProject.Extensions.HelperFunctions;
 using APIProject.Extensions.OutOfGuesses;
 using APIProject.Interfaces;
@@ -62,7 +61,7 @@ namespace ConsoleUI
         }
         private void StoreNewAPI()
         {
-            API = new API(new Model());
+            API = new APIProject.API(new APIProject.Model());
         }
 
         // Calls Play

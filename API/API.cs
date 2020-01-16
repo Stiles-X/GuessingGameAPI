@@ -1,15 +1,14 @@
 ﻿using System;
-
 namespace APIProject
 {
     public class API : Interfaces.IAPI
     {
-        private Interfaces.IModel Model { get; set; }
+        #pragma warning disable CA1303 // Do not pass literals as localized parameters
+        public Interfaces.IModel Model { get; private set; }
         public API(Interfaces.IModel model)
         {
             this.Model = model;
         }
-
         public int GetMax()
         {
             return Model.Max;
@@ -45,11 +44,11 @@ namespace APIProject
         {
             if (guess > GetMax())
             {
-                throw new ArgumentOutOfRangeException("guess", "Your guess is more than Max");
+                throw new ArgumentOutOfRangeException(nameof(guess), "Your guess is more than Max");
             }
             else if (guess < GetMin())
             {
-                throw new ArgumentOutOfRangeException("guess", "Your guess is less than Min");
+                throw new ArgumentOutOfRangeException(nameof(guess), "Your guess is less than Min");
             }
 
             if (GetUsedGuesses() >= GetAllowedGuesses())
