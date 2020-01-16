@@ -2,6 +2,8 @@
 {
     public interface IAPI
     {
+        //Model
+        IModel Model { get; }
         //Max
         int GetMax();
         void SetMax(int max);

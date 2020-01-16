@@ -5,7 +5,7 @@ using APIProject.Extensions.HelperFunctions;
 
 namespace ConsoleUI.GameHelper
 {
-    public class GameAsk
+    public static class GameAsk
     {
         private static bool TryAskInt(out int value)
         {
@@ -19,6 +19,7 @@ namespace ConsoleUI.GameHelper
         //Max
         public static void AskMax(IAPI api)
         {
+            AssertAPINotNull(ref api);
             do
             {
                 Console.Write("Enter Max Number: ");
@@ -39,6 +40,7 @@ namespace ConsoleUI.GameHelper
         //Min
         public static void AskMin(IAPI api)
         {
+            AssertAPINotNull(ref api);
             do
             {
                 Console.Write("Enter Min Number: ");
@@ -59,6 +61,7 @@ namespace ConsoleUI.GameHelper
         //Correct
         public static void AskCorrect(IAPI api)
         {
+            AssertAPINotNull(ref api);
             do
             {
                 Console.Write("Enter 'Correct' Number: ");
@@ -83,6 +86,7 @@ namespace ConsoleUI.GameHelper
         //AllowedGuesses
         public static void AskAllowedGuesses(IAPI api)
         {
+            AssertAPINotNull(ref api);
             do
             {
                 Console.Write("Enter Number of Guesses: ");
@@ -103,6 +107,7 @@ namespace ConsoleUI.GameHelper
         //Guess
         public static bool Guess(IAPI api)
         {
+            AssertAPINotNull(ref api);
             do
             {
                 Console.Write($"{api.GetLeftGuesses()} Gs left. Guess between {api.GetMax()} and {api.GetMin()}: ");
@@ -127,6 +132,13 @@ namespace ConsoleUI.GameHelper
                 }
             } while (true);
             return false;
+        }
+        private static void AssertAPINotNull(ref IAPI api)
+        {
+            if (api == null)
+            {
+                throw new ArgumentNullException(nameof(api));
+            }
         }
     }
 }

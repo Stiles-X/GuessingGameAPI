@@ -20,6 +20,7 @@ namespace ConsoleUI
         }
         private void AskInfo()
         {
+            AssertAPINotNull();
             GameAsk.AskMax(API);
             GameAsk.AskMin(API);
             if (IsSingle)
@@ -39,6 +40,7 @@ namespace ConsoleUI
         }
         private bool Guess()
         {
+            AssertAPINotNull();
             do
             {
                 if (GameAsk.Guess(API))
@@ -50,6 +52,7 @@ namespace ConsoleUI
         }
         private void Inform(bool isGuessCorrect)
         {
+            AssertAPINotNull();
             if (isGuessCorrect)
             {
                 Console.WriteLine("Congratulations, you guessed correctly");
@@ -76,10 +79,12 @@ namespace ConsoleUI
         }
 
         // Extra Functions
-        /*private void DisplayState()
+        private void AssertAPINotNull()
         {
-            Console.WriteLine($"Max: {API.GetMax()}");
-            Console.WriteLine($"Min: {API.GetMin()}");
-        }*/
+            if (API == null)
+            {
+                throw new InvalidOperationException("API cannot be null");
+            }
+        }
     }
 }

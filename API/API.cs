@@ -1,41 +1,47 @@
 ﻿using System;
+
 namespace APIProject
 {
     public class API : Interfaces.IAPI
     {
-        #pragma warning disable CA1303 // Do not pass literals as localized parameters
         public Interfaces.IModel Model { get; private set; }
         public API(Interfaces.IModel model)
         {
-            this.Model = model;
+            this.Model = model ?? throw new ArgumentNullException(nameof(model));
         }
         public int GetMax()
         {
+            AssertModelNotNull();
             return Model.Max;
         }
 
         public void SetMax(int max)
         {
+            AssertModelNotNull();
             Model.Max = max;
         }
 
         public int GetMin()
         {
+            AssertModelNotNull();
             return Model.Min;
         }
 
         public void SetMin(int min)
         {
+            AssertModelNotNull();
             Model.Min = min;
         }
 
         public int GetCorrect()
         {
+            AssertModelNotNull();
             return Model.Correct;
         }
 
         public void SetCorrect(int correct)
         {
+            AssertModelNotNull();
             Model.Correct = correct;
         }
 
@@ -61,23 +67,34 @@ namespace APIProject
 
         public int GetAllowedGuesses()
         {
+            AssertModelNotNull();
             return Model.AllowedGuesses;
         }
 
         public void SetAllowedGuesses(int allowedGuesses)
         {
+            AssertModelNotNull();
             Model.AllowedGuesses = allowedGuesses;
         }
 
         public int GetUsedGuesses()
         {
+            AssertModelNotNull();
             return Model.UsedGuesses;
         }
 
         public void SetUsedGuesses(int usedGuesses)
         {
+            AssertModelNotNull();
             Model.UsedGuesses = usedGuesses;
         }
-
+        private void AssertModelNotNull()
+        {
+            AssertModelNotNull();
+            if (Model == null)
+            {
+                throw new InvalidOperationException("Model cannot be null");
+            }
+        }
     }
 }

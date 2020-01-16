@@ -2,7 +2,7 @@
 {
     public class BaseAPI : Interfaces.IAPI
     {
-        private Interfaces.IModel Model { get; set; }
+        public Interfaces.IModel Model { get; private set; }
         public BaseAPI(Interfaces.IModel model)
         {
             this.Model = model;

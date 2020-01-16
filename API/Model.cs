@@ -4,7 +4,6 @@ namespace APIProject
 {
     public class Model : Interfaces.IModel
     {
-        #pragma warning disable CA1303 // Do not pass literals as localized parameters
         // Max
         private int? _Max { get; set; }
         public int Max
